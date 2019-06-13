@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 设置常量实现动态调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <!--开发模式-->
+    <constant name="struts.devMode" value="false"/>
+    <!-- 解决jsp提交到action中文乱码问题 -->
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <!-- Add packages here -->
+
+    <package name="struts2" namespace="/" extends="struts-default">
+
+        <global-results>
+            <result name="teaerror" type="redirect">/teacher/login.jsp</result>
+        </global-results>
+        <!-- 员工登入成功的话 -->
+        <action name="login" class="com.action.LoginAction">
+            <!-- http://m.blog.csdn.net/blog/vipyhd/41248169  解决chain报错但是流程正确的问题 -->
+            <result name="studentSuccess" type="redirectAction">getRandomSubject
+                <!--  获取随机的题目
+                <param name="actionName" >getRandomSubject</param>
+                <param name="namespace">/</param> -->
+            </result>
+            <!-- 教师登录成功的话 -->
+            <result name="teacherSuccess">/teacher/teacher.jsp</result>
+            <!-- 账号或者密码错误 -->
+            <result name="studenterror">/login.jsp</result>
+            <result name="terchererror">/teacher/login.jsp</result>
+        </action>
+        <!-- ajax验证学号有没有重复 -->
+        <action name="checkStudentID" class="com.action.CheckStudentID">
+            <result name="success">studentAdd.jsp</result>
+        </action>
+        <!-- ajax验证身份证有没有重复 -->
+        <action name="checkPassword" class="com.action.CheckPassword">
+            <result name="success">studentAdd.jsp</result>
+        </action>
+
+        <action name="submitExam" class="com.action.SubmitExamAction"><!-- 计算分数 -->
+            <result name="success">/student/result.jsp</result>
+
+            <result name="error">/login.jsp</result>
+        </action>
+        <!-- 获取随机的题目 -->
+        <action name="getRandomSubject" class="com.action.GetRandomSubjects">
+            <result name="success">/student/index.jsp</result>
+            <result name="studentphone">/student/index_co.jsp</result>
+            <result name="error">/login.jsp</result>
+        </action>
+        <!-- 显示答案和解析 -->
+        <action name="showSubjectAnswer" class="com.action.ShowSubjectAnswerAction">
+            <result name="success">/student/showAnswer.jsp</result>
+            <result name="studentco">/student/showAnswer_co.jsp</result>
+            <result name="error">/login.jsp</result>
+        </action>
+
+      <!--  重做-->
+        <action name="Reform" class="com.action.Reform">
+            <result name="success">/student/index.jsp</result>
+            <result name="studentco">/student/index_co.jsp</result>
+            <result name="error">/login.jsp</result>
+        </action>
+        <!-- 根据姓名查找员工 -->
+        <action name="queryStudentByName" class="com.action.QueryStudentByNameAction">
+            <result name="success">/teacher/studentManager.jsp</result>
+        </action>
+        <!-- 根据部门来查找员工 -->
+        <action name="queryStudentByClass" class="com.action.QueryStudentByClassAction">
+            <result name="success">/teacher/studentManagerByClass.jsp</result>
+        </action>
+        <!-- 根据主键查找员工 -->
+        <action name="queryStudentByID" class="com.action.QueryStudentByIDAction">
+            <result name="success">/teacher/studentShow.jsp</result>
+        </action>
+        <!-- 添加员工 -->
+        <action name="studentAdd" class="com.action.StudentAddAction">
+            <result name="success">/teacher/studentaddSuccess.jsp</result>
+            <result name="error">/teacher/studenterror.jsp</result>
+        </action>
+        <action name="scordeAdd" class="com.action.ScordeAction" method="add">
+            <result name="success">/teacher/studentaddSuccess.jsp</result>
+            <result name="error">/teacher/studenterror.jsp</result>
+        </action>
+        <action name="deleteScorde" class="com.action.ScordeAction" method="delete">
+
+        </action>
+        <!-- 添加试题 -->
+        <action name="subjectAdd" class="com.action.SubjectAddAction">
+            <result name="success">/teacher/studentaddSuccess.jsp</result>
+            <result name="error">/teacher/subjectAdd.jsp</result>
+        </action>
+        <!--查询题目 -->
+        <action name="querySubject" class="com.action.QuerySubjectAction">
+            <result name="success">/teacher/subjectManager.jsp</result>
+        </action>
+        <!--模糊匹配查询题目 -->
+        <action name="querySubjectLike" class="com.action.QuerySubjecLiketAction">
+            <result name="success">/teacher/subjectLikeManager.jsp</result>
+            <result name="likeerror">/teacher/subjectQuery.jsp</result>
+        </action>
+        <!-- 显示题目详情 -->
+        <action name="subjectPaticular" class="com.action.SubjectPaticularAction">
+            <result name="success">/teacher/subjectshow.jsp</result>
+        </action>
+        <!-- 更新题目前-显示题目的详情 -->
+        <action name="subjectUpadateBefore" class="com.action.SubjectUpdateBefore">
+            <result name="success">/teacher/subjectUpdate.jsp</result>
+        </action>
+        <!-- 更新试题 -->
+        <action name="subjectUpadate" class="com.action.SubjectUpdateAction">
+            <result name="success">/teacher/studentUpdatesSelect.jsp</result>
+        </action>
+        <!-- 删除试题  -->
+        <action name="subjectDelete" class="com.action.SubjectDeleteAction" method="execute">
+
+            <result name="success" type="chain">
+                <param name="actionName">querySubject</param>
+                <param name="namespace">/</param>
+            </result>
+        </action>
+        <action name="subjectDeletecheck" class="com.action.SubjectDeleteAction" method="subjectDeletecheck">
+            <result name="success" type="chain">
+                <param name="actionName">querySubject</param>
+                <param name="namespace">/</param>
+            </result>
+        </action>
+
+        <action name="studentQuery" class="com.action.StudentQuery">
+            <result name="success">/teacher/studentManager.jsp</result>
+        </action>
+        <action name="studentAssessQuery" class="com.action.StudentAssessQuery">
+            <result name="success">/teacher/studentAssessManager.jsp</result>
+        </action>
+        <!-- word文档解析并返回页面 -->
+        <action name="subjectWord" method="addWord" class="com.action.SubjectWord">
+            <result name="input">/error.jsp</result>
+
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">500000000</param>
+                <!-- <param name="allowedTypes">text/plain,application/vnd.ms-excel,application/msword</param> -->
+                <param name="allowedExtensions">txt,ppt,doc,docx</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success">/teacher/subjectWordSuccess.jsp</result>
+            <result name="error">/teacher/subjectWord.jsp</result>
+
+        </action>
+        <!-- word文档录入 -->
+        <action name="saveWord" class="com.action.SubjectWord" method="saveWord">
+            <result name="listsuccess">/teacher/subjectError.jsp</result>
+            <result name="success" type="redirect">/teacher/teacher.jsp</result>
+            <result name="error">/teacher/subjectWord.jsp</result>
+        </action>
+        <!-- 员工注册 -->
+        <action name="regStudentAction" class="com.action.RegStudentAction" method="reg">
+            <result name="success">/login.jsp</result>
+            <result name="error">/reg.jsp</result>
+        </action>
+        <!-- 老师注册 -->
+        <action name="regTeacherAction" class="com.action.RegTeacherAction" method="regTeacher">
+            <result name="success">/login.jsp</result>
+            <result name="error">/reg.jsp</result>
+        </action>
+        <!-- 2019.3.6  niuniu修改       删除单条员工信息-->
+        <action name="delete" class="com.action.StudentDeleteAction" method="delete">
+            <result name="success" type="redirectAction">studentQuery</result>
+        </action>
+        <action name="deletecheck" class="com.action.StudentDeleteAction" method="deletecheck">
+            <result name="success" type="redirectAction">studentQuery</result>
+        </action>
+        <!-- 2019.3.6  niuniu修改      修改单条员工信息-->
+        <action name="update" class="com.action.StudentUpdateAction" method="execute">
+            <result name="success">/teacher/studentUpdatesSelect.jsp</result>
+            <result name="error">/teacher/studentUpdateserror.jsp</result>
+        </action>
+        <!-- 查询部门员工成绩柱状图 -->
+        <action name="studentJfree" class="com.action.StudentJfreeChar" method="jfree">
+        </action>
+        <!-- 2019.3.6  niuniu修改      修改数据回显员工信息-->
+        <action name="studentupdate" class="com.action.UpdateUtliAction2" method="update">
+            <result name="success">/teacher/studentUpdate.jsp</result>
+        </action>
+        <!-- 批量录入员工 -->
+        <action name="studentExcel" method="Excel" class="com.action.StudentExcel">
+            <result name="input">/error.jsp</result>
+
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">500000000</param>
+                <!-- <param name="allowedTypes">text/plain,application/vnd.ms-excel,application/msword</param> -->
+                <param name="allowedExtensions">txt,xlsx,xls</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success" type="redirectAction">studentQuery</result>
+            <result name="error">/teacher/studenterror.jsp</result>
+
+        </action>
+        <action name="exportExcel" class="com.action.ExportExcel" method="exportExcel">
+            <result name="success" type="redirectAction">studentQuery</result>
+        </action>
+        <action name="QueryStudentsc" class="com.action.QueryStudent" method="query">
+            <result name="success">/teacher/studentinfo.jsp</result>
+        </action>
+        <!--一级分类-->
+        <action name="bigtype_*" class="com.action.BigtypeAction" method="{1}">
+            <result name="querysuccess">/teacher/bigtype/bigtypelist.jsp</result>
+            <result name="addsuccess">/teacher/studentaddSuccess.jsp</result>
+            <result name="adderror">/teacher/adderror.jsp</result>
+        </action>
+        <!--二级分类-->
+        <action name="centre_*" class="com.action.CentreAction" method="{1}">
+            <result name="querysuccess">/teacher/centre/centrelist.jsp</result>
+            <result name="addsuccess">/teacher/studentaddSuccess.jsp</result>
+            <result name="adderror">/teacher/adderror.jsp</result>
+        </action>
+        <!--三级分类-->
+        <action name="small_*" class="com.action.SmallAction" method="{1}">
+            <result name="querysuccess">/teacher/small/smalllist.jsp</result>
+            <result name="addsuccess">/teacher/studentaddSuccess.jsp</result>
+            <result name="adderror">/teacher/adderror.jsp</result>
+        </action>
+    </package>
+</struts>

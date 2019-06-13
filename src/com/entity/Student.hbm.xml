@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.entity.Student" lazy="false" table="db_student">
+        <!-- student id -->
+        <id name="sysid" column="sysid">
+            <!-- 主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <!-- 学号  -->
+        <property name="studentID" column="studentID"></property>
+        <!-- 密码 -->
+        <property name="password"></property>
+        <!-- 名字 -->
+        <property name="studentName"></property>
+        <!-- 成绩 -->
+        <property name="term"></property>
+        <!-- 部门 -->
+        <property name="sclass"></property>
+        <set name="sr" cascade="save-update" inverse="true">
+            <key column="stu_sysid"></key>
+            <one-to-many class="com.entity.Scorde"/>
+        </set>
+    </class>
+</hibernate-mapping>

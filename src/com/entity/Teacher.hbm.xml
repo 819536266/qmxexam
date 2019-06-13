@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.entity.Teacher" table="db_teacher" lazy="false">
+        <!-- student id -->
+        <id name="sysid" type="integer">
+            <!-- 主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <!-- 教师id -->
+        <property name="teacherID" not-null="true"></property>
+        <!-- 教师登录密码 -->
+        <property name="password" not-null="true"></property>
+        <!-- 教师所带部门 -->
+        <property name="sclass"></property>
+        <property name="sclass1"></property>
+        <property name="sclass2"></property>
+        <property name="sclass3"></property>
+    </class>
+</hibernate-mapping>

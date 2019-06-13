@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.entity.Scorde" lazy="false" table="db_student_scorde">
+        <!-- student id -->
+        <id name="scordeId" column="id">
+            <!-- 主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+
+        <!--员工  -->
+        <many-to-one name="stuSysid" class="com.entity.Student" column="stu_sysid" ></many-to-one>
+        <!-- <property name="stuSysid" column="stu_sysid"></property> -->
+        <!-- 分数 -->
+        <property name="timescore" column="score"></property>
+
+        <property name="assess" column="assess"></property>
+        <!-- 考试次数 -->
+        <property name="count" column="count"></property>
+        <!-- 考试时间-->
+        <property name="testtime" column="testtime"></property>
+
+    </class>
+</hibernate-mapping>

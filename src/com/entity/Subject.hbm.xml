@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.entity.Subject" table="db_subject" lazy="false">
+        <!-- student id -->
+        <id name="stID" type="integer">
+            <!-- 主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <property name="stTitle" not-null="true"></property>
+
+        <property name="stOptionA"></property>
+
+        <property name="stOptionB"></property>
+
+        <property name="stOptionC"></property>
+
+        <property name="stOptionD"></property>
+        <property name="stOptionE"></property>
+        <property name="stOptionF"></property>
+        <property name="stOptionG"></property>
+        <property name="stOptionH"></property>
+        <property name="stOptionI"></property>
+
+        <property name="stAnswer"></property>
+
+        <property name="stParse"></property>
+        <property name="sclass" column="sclass"></property>
+    </class>
+</hibernate-mapping>

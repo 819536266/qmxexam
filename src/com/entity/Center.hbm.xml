@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.entity.Centre" lazy="false" table="db_centre">
+        <!--  id -->
+        <id name="centreId" column="centre_id">
+            <!-- 主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <many-to-one name="centrePid" class="com.entity.Bigtype" column="centre_pid"></many-to-one>
+        <!-- 大分类名字 -->
+        <property name="centreName" column="centre_name"></property>
+        <!-- 简写-->
+        <property name="centreNano" column="centre_nano"></property>
+        <set name="list" cascade="delete" inverse="true" >
+            <key column="small_pid"></key>
+            <one-to-many class="com.entity.Small"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
