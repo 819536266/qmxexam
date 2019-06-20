@@ -159,7 +159,7 @@
                             <p class="stdformbutton">
                                 <input class="btn btn-primary" type="submit" value="录入" style="width:100px">
                                 <a href="<%=path %>/teacher/studentQuery.action">
-                                    <button class="btn">取消</button>
+                                    <button class="btn" type="button">取消</button>
                                 </a>
                             </p>
 

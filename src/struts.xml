@@ -223,5 +223,25 @@
             <result name="addsuccess">/teacher/studentaddSuccess.jsp</result>
             <result name="adderror">/teacher/adderror.jsp</result>
         </action>
+        <!--指标-->
+        <action name="target_*" class="com.action.TargetAction" method="{1}">
+            <result name="querysuccess">/teacher/target/targetlist.jsp</result>
+            <result name="addsuccess">/teacher/studentaddSuccess.jsp</result>
+            <result name="adderror">/teacher/adderror.jsp</result>
+            <result name="echosuccess">/teacher/target/targetupdate.jsp</result>
+            <result name="updatesuccess">/teacher/studentUpdatesSelect.jsp</result>
+            <result name="updateerror">/teacher/studentUpdateserror.jsp</result>
+            <result name="queryByUserIdsuccess">teacher/Assess/AssessScordeadd.jsp</result>
+        </action>
+        <!-- 考核题-->
+        <action name="assess_*" class="com.action.AssessAction" method="{1}">
+            <result name="querysuccess">/teacher/Assess/assesslist.jsp</result>
+            <result name="addsuccess">/teacher/studentaddSuccess.jsp</result>
+            <result name="adderror">/teacher/adderror.jsp</result>
+            <result name="echosuccess">/teacher/Assess/assessupdate.jsp</result>
+            <result name="updatesuccess">/teacher/studentUpdatesSelect.jsp</result>
+            <result name="updateerror">/teacher/studentUpdateserror.jsp</result>
+
+        </action>
     </package>
 </struts>

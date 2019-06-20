@@ -44,10 +44,9 @@
             <li class="dropdown "><a href=""><span class="iconfa-pencil"></span> 员工管理</a>
                 <ul>
                     <li><a href="<%=path %>/teacher/studentAdd.jsp">添加员工</a></li>
-                    <%-- <li ><a  href="<%=path %>/teacher/studentDelete.jsp">删除员工</a></li> --%>
-                    <%-- <li ><a  href="<%=path %>/teacher/studentUpdate.jsp">修改员工</a></li> --%>
                     <li><a href="<%=path %>/teacher/studentQuery.action">查询员工考试分数</a></li>
                     <li><a href="<%=path %>/teacher/studentAssessQuery.action">查询员工考核分数</a></li>
+                    <li><a href="<%=path %>/target_query.action">查询考核指标</a></li>
                     <li><a href="<%=path %>/teacher/studentJfree.jsp">显示部门柱状图</a></li>
                 </ul>
             </li>

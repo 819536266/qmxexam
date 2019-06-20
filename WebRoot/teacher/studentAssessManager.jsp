@@ -107,7 +107,7 @@
             <font size="2" face="宋体"  color="red">${term==null?'':term }&nbsp;&nbsp;</font>
             <button class="btn" style="background-color: rgb(30, 130, 232); " onclick="fun()">查询</button>
             &nbsp; &nbsp; &nbsp;&nbsp;<button class="btn" style="background-color: rgb(30, 130, 232);" onclick="funexcel()">导出Excel</button>
-            <form method="get" action="${pageContext.request.contextPath}/studentQuery">
+            <form method="get" action="${pageContext.request.contextPath}/studentAssessQuery">
                 &nbsp; &nbsp; &nbsp;&nbsp;<span> <font size="3" face="楷体" color="rgb(30, 130, 232);">输入姓名查询:</font> </span>
                 <input type="text" value="${name }" name="name" id="name">
                 <input type="submit"  class="btn" style="background-color: rgb(30, 130, 232);" value="查询">
@@ -127,7 +127,7 @@
                 <h4 class="widgettitle">员工表</h4>
                 <table id="dyntable" class="table table-bordered responsive">
                     <colgroup>
-                        <col class="con0" style="align: center; width: 15%"/>
+                        <col class="con0" style="align: center; width: 10%"/>
 
                         <col class="con0" style="align: center; width: 15%"/>
                         <col class="con1" style="align: center; width: 15%"/>
@@ -161,11 +161,12 @@
                                 String  studentname=new String(scorde.getStuSysid().getStudentName().getBytes("utf-8"),"utf-8") ;
                                 request.setAttribute("studentname",studentname);
                             %>
-                            <td><a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看</a>
-
+                            <td><a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看所有</a>&nbsp;&nbsp;&nbsp;
+                                <a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看本次</a>&nbsp;&nbsp;&nbsp;
                                 <a href="studentupdate?sysid=${student.stuSysid.sysid}">修改</a>&nbsp;&nbsp;&nbsp;
                                 <a id="deletestudent" onclick="deleteJobDetail(${student.stuSysid.sysid})">删除</a>&nbsp;&nbsp;&nbsp;
-                                <a  href="Scordeadd.jsp?sysid=${student.stuSysid.sysid}&assess=1&studentName=${studentname}">添加分数</a>
+                                <%--<a  href="Scordeadd.jsp?sysid=${student.stuSysid.sysid}&assess=1&studentName=${studentname}">添加考核</a>--%>
+                                <a  href="${pageContext.request.contextPath}/target_queryByUserId.action?Student.sysid=${student.stuSysid.sysid}">添加考核</a>
                             </td>
                         </tr>
                     </s:iterator>

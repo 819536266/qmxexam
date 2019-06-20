@@ -3,6 +3,7 @@ package test;
 import com.entity.Bigtype;
 import com.entity.Centre;
 import com.util.HibernateSessionFactory;
+import com.util.MD5;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -20,7 +21,15 @@ import java.util.Set;
 public class demo {
     @Test
     public void text(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yymm");
+
+            char[] a = "c4e8c01fa835df8e".toCharArray();
+            for (int i = 0; i < a.length; i++){
+                a[i] = (char) (a[i] ^ 't');
+            }
+            String s = new String(a);
+
+        System.out.println(s);
+       /* SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yymm");
         Date parse = null;
         try {
             parse = simpleDateFormat
@@ -29,6 +38,6 @@ public class demo {
             e.printStackTrace();
         }
         simpleDateFormat.applyPattern("yyyy-mm");
-        System.out.println(simpleDateFormat.format(parse));
+        System.out.println(simpleDateFormat.format(parse));*/
     }
 }

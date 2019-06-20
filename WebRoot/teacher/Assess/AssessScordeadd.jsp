@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="c" uri="/struts-tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-timepicker.min.css" type="text/css"/>
     <link rel="shortcut icon" href="<%=path %>/images/favicon.ico"/>
     <script src="<%=path %>/js/jquery-2.1.4.min.js"></script>
-    <script src="<%=path %>/js/select.js"></script>
     <style type="text/css">
 
         select {
@@ -54,8 +53,7 @@
 <body>
 
 <div class="mainwrapper">
-
-    <c:include value="../header.jsp"/>
+    <c:import url="../header.jsp"/>
 
     <div class="rightpanel">
 
@@ -78,8 +76,8 @@
             </li>
         </ul>
 
-        <div class="pageheader">
-            &nbsp; &nbsp; &nbsp;&nbsp; <span> <font size="3" face="楷体" color="rgb(30, 130, 232);">选择部门:  </font> </span>
+       <%-- <div class="pageheader">
+          &lt;%&ndash;  &nbsp; &nbsp; &nbsp;&nbsp; <span> <font size="3" face="楷体" color="rgb(30, 130, 232);">选择部门:  </font> </span>
             <span class="field" id="span">
                                     <select class="form-control" id="selectone" onchange="fun1()"
                                             style="width:110px"></select>
@@ -114,14 +112,14 @@
                                                        color="rgb(30, 130, 232);">输入姓名查询:</font> </span>
                 <input type="text" value="${name }" name="name" id="name">
                 <input type="submit" class="btn" style="background-color: rgb(30, 130, 232);" value="查询">
-            </form>
+            </form>&ndash;%&gt;
 
 
             &nbsp;&nbsp;&nbsp;&nbsp;
             <!-- 到处excel -->
 
 
-        </div>
+        </div>--%>
         <div class="maincontent">
             <div class="maincontentinner">
 
@@ -135,21 +133,23 @@
                         <col class="con1" style="align: center; width: 2%"/>
                         <col class="con1" style="align: center; width: 2%"/>
                         <col class="con1" style="align: center; width: 2%"/>
+                        <col class="con1" style="align: center; width: 2%"/>
                         <col class="con1" style="align: center; width: 10%"/>
                     </colgroup>
                     <thead>
                         <tr  >
-                            <td  rowspan="2" style="text-align:center;vertical-align:middle; "><h3>考核指标</h3></td>
+                            <td  rowspan="2" style="text-align:center;vertical-align:middle; "><h4>考核指标</h4></td>
                             <td  rowspan="2" style="text-align:center;vertical-align:middle;"><h3>考核内容</h3></td>
-                            <td  colspan="5" width="50px" style="text-align:center;vertical-align:middle;"><h3>分值</h3></td>
+                            <td  colspan="6" width="50px" style="text-align:center;vertical-align:middle;"><h3>分值</h3></td>
                             <td  rowspan="2" style="text-align:center;vertical-align:middle;"><h3>分数</h3></td>
                         </tr>
                         <tr >
                             <td >5</td>
-                            <td>4</td>
+                            <td >4</td>
                             <td >3</td>
                             <td >2</td>
                             <td >1</td>
+                            <td >0</td>
                         </tr>
 
                     <%--<tr>
@@ -168,27 +168,36 @@
                     </tr>--%>
                     </thead>
                     <tbody>
-
-                    <s:iterator value="#request.students" var="student">
-                        <tr align="center">
-                            <td><input class="check" type="checkbox" value="${student.stuSysid.sysid}"></td>
-                            <td>${student.stuSysid.studentID}</td>
-                            <td>${student.stuSysid.sclass}</td>
-                            <td>${student.stuSysid.studentName}</td>
-                            <td>${student.timescore} </td>
-                            <% Scorde scorde = (Scorde) request.getAttribute("student");
-                                String studentname = new String(scorde.getStuSysid().getStudentName().getBytes("utf-8"), "utf-8");
-                                request.setAttribute("studentname", studentname);
-                            %>
-                            <td><a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看</a>
-
-                                <a href="studentupdate?sysid=${student.stuSysid.sysid}">修改</a>&nbsp;&nbsp;&nbsp;
-                                <a id="deletestudent" onclick="deleteJobDetail(${student.stuSysid.sysid})">删除</a>&nbsp;&nbsp;&nbsp;
-                                <a href="Scordeadd.jsp?sysid=${student.stuSysid.sysid}&assess=1&studentName=${studentname}">添加分数</a>
-                            </td>
+                    <c:set var="num" value="0"></c:set>
+                    <s:iterator value="#request.targets" var="target" status="var" >
+                        <input type="hidden" name="scorde.sysid" value="">
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle; " rowspan="${target.assess.size()+1}" >${target.name}</td>
                         </tr>
+                        <c:forEach  items="${target.assess}" var="assess" varStatus="v">
+                            <tr >
+                                <td>${assess.content}</td>
+                                <td><input type="radio" name="redio${assess.id}" value="5" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="redio${assess.id}" value="4" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="redio${assess.id}" value="3" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="redio${assess.id}" value="2" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="redio${assess.id}" value="1" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="redio${assess.id}" value="0" onclick="rowscord(this)"/></td>
+                                <td ><span class="rowcount">0</span>分</td>
+                                <c:set var="num" value="${num+1}"></c:set>
+                            </tr>
+                        </c:forEach>
                     </s:iterator>
-
+                    <tr style="text-align:center;vertical-align:middle; ">
+                        <td colspan="2" style="text-align:center;vertical-align:middle;">部门领导评分</td>
+                        <td colspan="3" style="text-align:center;vertical-align:middle;">分值</td>
+                        <td colspan="4" style="text-align:center;vertical-align:middle;"><input type="text" value="0" readonly="readonly" style="width: 20px" class="count"/>分</td>
+                    </tr>
+                    <tr >
+                        <td colspan="2" style="text-align:center;vertical-align:middle;">总经理评分</td>
+                        <td colspan="3" style="text-align:center;vertical-align:middle;">分值</td>
+                        <td colspan="4" style="text-align:center;vertical-align:middle;"><input type="text" value="0"  readonly="readonly"   style="width: 20px" class="count"/>分</td>
+                    </tr>
 
                     </tbody>
                 </table>
@@ -210,6 +219,18 @@
 
 </div><!--mainwrapper-->
 <script type="text/javascript">
+
+    function rowscord(redio) {
+
+        $(redio).parent().siblings().last().children().html($(redio).val());
+        count=0;
+        $(".rowcount").each(function () {
+            count+= parseInt($(this).html());
+        })
+        $(".count").each(function () {
+            $(this).val(count);
+        })
+    }
     function deletecheck() {
         var check = new Array();
         if (window.confirm("你确定要删除吗")) {
@@ -263,86 +284,7 @@
             $("#checkbox").prop("checked", false);
         }
     })
-    $(function () {
-        $("#checkbox").attr("checked", false);
-        $("#date").selectDate();
-        $.ajax({
-            type: "post",
-            url: "<%=path %>/bigtype_queryall.action",
-            success: function (data) {
-                $("#selectone").empty();
-                data = JSON.parse(data);
-                $(data).each(function (i, n) {
-                    $("#selectone").append("<option  url='" + n.bigId + "' value='" + n.bigName + "'>" + n.bigName + "</option>");
 
-                });
-                fun1(data[0].bigId);
-            }
-        })
-
-    })
-
-    function fun1(bid) {
-        id = $("#selectone").find("option:selected").attr("url");
-        if (id == null || id == "") {
-            id = bid;
-        }
-        $.ajax({
-            type: "post",
-            url: "${pageContext.request.contextPath}/centre_queryByPid.action",
-            data: {'centrePid.bigId': id},
-            success: function (data) {
-                $("#selecttwo").empty();
-                $("#selecttwo").append("<option  value=''>" + "---请选择---" + "</option>");
-                $(JSON.parse(data)).each(function (i, n) {
-                    $("#selecttwo").append("<option url='" + n.centreId + "' value='" + n.centreName + "'>" + n.centreName + "</option>");
-                });
-                a = "${request.sclass}";
-                if (a != null && a != "") {
-
-                    $("#selecttwo").append("<option val='${request.sclass}'  selected='selected'>${request.sclass}</option>");
-
-                }
-                fun2(data[0].centreId);
-            }
-        })
-
-    }
-
-    function fun2(centreId) {
-
-        id = $("#selecttwo").find("option:selected").attr("url");
-
-        if (id == null || id == "") {
-            id = centreId;
-        }
-        if (id != undefined) {
-            $.ajax({
-                type: "post",
-                url: "${pageContext.request.contextPath}/small_queryByPid.action",
-                data: {'smallPid.centreId': id},
-                success: function (data) {
-                    data = JSON.parse(data);
-                    if (data.length > 0) {
-                        $("#span #selectthree").remove();
-                        $("#selecttwo").attr("name", "");
-
-                        selectthree = $("<select class='form-control' name='sclass' id='selectthree' style='width:110px'></select>");
-                        $("#span").append(selectthree);
-                        $(selectthree).append("<option  value=''>" + "---请选择---" + "</option>");
-                        $(data).each(function (i, n) {
-                            $(selectthree).append("<option  value='" + n.smallName + "'>" + n.smallName + "</option>");
-                        });
-
-                    } else {
-                        $("#selecttwo").attr("name", "sclass");
-                        $("#span #selectthree").remove();
-
-                    }
-                }
-            })
-        }
-    }
 </script>
 <script type="text/javascript">
     function funexcel() {

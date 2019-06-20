@@ -67,7 +67,7 @@
             <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
             </li>
             <li><a href="table-static.html">员工管理</a> <span class="separator"></span></li>
-            <li>解析Word</li>
+            <li></li>
 
             <li class="right">
                 <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
@@ -85,7 +85,7 @@
         <div class="maincontent">
             <div class="maincontentinner">
 
-                <h4 class="widgettitle">添加员工</h4>
+                <h4 class="widgettitle"></h4>
                 <hr>
                 <div style="width: 20%;height: 20%;margin: auto;">
                     <font size="7" color="red">更新成功!</font>

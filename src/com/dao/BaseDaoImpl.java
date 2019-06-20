@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.entity.Target;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -27,14 +28,11 @@ public class BaseDaoImpl implements BaseDao {
     public Object find(Object object, int id) {
         Session session = HibernateSessionFactory.getSession();
         Object returnObject = null;
-        try {
-            returnObject = session.get(object.getClass(), id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return returnObject;
+        returnObject = session.get(object.getClass(), id);
+        Target target=(Target)returnObject;
+        System.out.println(target.getAssess());
+            HibernateSessionFactory.closeSession();
+        return target;
     }
 
     @Override
