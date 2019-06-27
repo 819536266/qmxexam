@@ -39,7 +39,7 @@ public interface StudentDao extends BaseDao {
     //根据主键查询
     public Student findBySysid(Integer studentID);
 
-    //根据员工身份证查找
+    //根据员工密码查找
     public Student findByPassword(String password);
 
 

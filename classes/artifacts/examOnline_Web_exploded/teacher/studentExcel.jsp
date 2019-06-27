@@ -37,32 +37,6 @@
 <title>企明星考核系统</title>
 <body>
 
-<div class="mainwrapper">
-
-    <div class="mainwrapper">
-        <c:include value="header.jsp"/>
-
-        <div class="rightpanel">
-
-            <ul class="breadcrumbs">
-                <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span
-                        class="separator"></span></li>
-                <li><a href="">试题管理</a> <span class="separator"></span></li>
-                <li>添加员工</li>
-
-                <li class="right">
-                    <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                    <ul class="dropdown-menu pull-right skin-color">
-                        <li><a href="default">Default</a></li>
-                        <li><a href="navyblue">Navy Blue</a></li>
-                        <li><a href="palegreen">Pale Green</a></li>
-                        <li><a href="red">Red</a></li>
-                        <li><a href="green">Green</a></li>
-                        <li><a href="brown">Brown</a></li>
-                    </ul>
-                </li>
-            </ul>
-
 
             <div class="maincontent">
                 <div class="maincontentinner">
@@ -164,26 +138,6 @@
                 </div>
                 <!--widgetcontent-->
             </div>
-            <!--widget-->
-
-            <div class="footer" >
-                <div class="footer-left">
-                    <span>&copy; 2013.  All Rights Reserved.</span>
-                </div>
-
-            </div>
-            <!--footer-->
-
-        </div>
-        <!--maincontentinner-->
-    </div>
-    <!--maincontent-->
-
-</div>
-<!--rightpanel-->
-
-</div>
-<!--mainwrapper-->
 
 </body>
 <script>

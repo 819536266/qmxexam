@@ -57,37 +57,15 @@
 <title>老师登陆成功</title>
 <body>
 
-<div class="mainwrapper">
-    <c:include value="header.jsp"/>
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li><a href="table-static.html">员工管理</a> <span class="separator"></span></li>
-            <li>查询所有员工</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
 
         <div class="maincontent">
-            <div class="maincontentinner">
+            <div class="table-responsive">
 
                 <h4 class="widgettitle">试题库</h4>
                 <hr>
                 <font size="5" color="red">以下试题存储失败,请查看是否已添加或者文档中格式不正确!</font>
                 <form action="subjectworderror" method="post">
-                    <table id="dyntable" class="table table-bordered responsive">
+                    <table id="dyntable" class="table-hover table-bordered text-nowrap">
 
                         <tbody>
 
@@ -120,20 +98,9 @@
                     </table>
                     <br/><br/>
 
-                    <div class="footer" >
-                        <div class="footer-left">
-                            <span>&copy; 2019. 企明星考核系统.</span>
-                        </div>
-
-                    </div><!--footer-->
-
+                </form>
             </div><!--maincontentinner-->
         </div><!--maincontent-->
-
-
-    </div><!--rightpanel-->
-
-</div><!--mainwrapper-->
 
 </body>
 </html>

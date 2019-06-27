@@ -30,11 +30,16 @@ public class CheckPassword {
         HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        if (studentServiceImpl.getStudentPassword(MD5.Encrypt(password)) != null) {//如果有重复的话
-            out.print("身份证号已存在!请重新输入!");
+        if(studentServiceImpl.getStudentByName(password)!=null){
+            out.print("用户名已存在!请重新输入!");
         } else {
             out.print("可以注册！");
         }
+      /*  if (studentServiceImpl.getStudentPassword(MD5.Encrypt(password)) != null) {//如果有重复的话
+            out.print("用户名已存在!请重新输入!");
+        } else {
+            out.print("可以注册！");
+        }*/
         return null;
     }
 

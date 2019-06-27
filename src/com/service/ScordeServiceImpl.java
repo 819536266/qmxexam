@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.util.BootstrapTable;
 import com.util.Condition;
 import com.util.Page;
 import org.hibernate.criterion.DetachedCriteria;
@@ -18,7 +19,7 @@ import com.entity.Scorde;
 import com.entity.Student;
 import com.util.CreateChartServiceImpl;
 
-public class ScordeServiceImpl implements ScordeService {
+public class ScordeServiceImpl  implements ScordeService{
 
     private ScordeDao dao = new ScordeDaoImpl();
     private StudentDao studentdao = new StudentDaoImpl();
@@ -30,8 +31,8 @@ public class ScordeServiceImpl implements ScordeService {
     }
 
     @Override
-    public void saveScorde(Scorde studentScorde) {
-        dao.saveScorde(studentScorde);
+    public int saveScorde(Scorde studentScorde) {
+        return dao.saveScorde(studentScorde);
     }
 
     //根据部门查询所有员工,显示最后一次成绩柱状图
@@ -99,5 +100,20 @@ public class ScordeServiceImpl implements ScordeService {
     @Override
     public void deleteScorde(Scorde scorde) {
         dao.deleteScorde(scorde);
+    }
+
+    @Override
+    public Scorde getByid(Scorde scorde) {
+        return dao.findByid(scorde,scorde.getScordeId());
+    }
+
+    @Override
+    public int getByCriteriaCount(DetachedCriteria detachedCriteria) {
+        return dao.getByCriteriaCount(detachedCriteria);
+    }
+
+    @Override
+    public List<Scorde> getByCriteria(DetachedCriteria detachedCriteria, BootstrapTable table) {
+        return dao.getByCriteria(detachedCriteria,table);
     }
 }

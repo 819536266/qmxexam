@@ -31,34 +31,7 @@
     <title>企明星考核系统</title>
 </head>
 <body>
-<div class="container">
 
-    <div class="header">
-        <div class="logo">
-            <a href="dashboard.html"><img src="<%=path %>/images/logo.png" alt=""/></a>
-        </div>
-        <div class="headerinner">
-            <ul class="headmenu">
-
-                <li class="right">
-                    <div class="userloggedinfo">
-                        <div class="userinfo">
-                            <ul>
-                                <li><a href="http://cj63495025.net/school/query.jsp">
-                                    <button style="width: 100px;height: 50px;background-color: rgba(144, 238, 144,0.9); ">
-                                        返回
-                                    </button>
-                                </a></li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </li>
-            </ul>
-            <!--headmenu-->
-        </div>
-    </div>
-</div>
 <div class="examed_uc maincontentinner">
     <div style="width:400px;margin: auto;" id="id">
         <p>
@@ -113,12 +86,6 @@
 
 <br/><br/>
 
-<div class="footer" >
-    <div class="footer-left">
-        <span>&copy; 2019. 企明星考核系统.</span>
-    </div>
-
-</div><!--footer-->
 
 </div><!--mainwrapper-->
 

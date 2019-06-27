@@ -76,7 +76,7 @@ h4 {
 }
 
 body {
-    background: url(../images/leftpanelbg.png) repeat-y 0 0;
+  /*  background: url(../images/leftpanelbg.png) repeat-y 0 0;*/
     font-size: 12px;
     font-family: 'RobotoRegular', 'Helvetica Neue', Helvetica, sans-serif;
 }

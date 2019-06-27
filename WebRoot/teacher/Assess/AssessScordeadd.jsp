@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="<%=path %>/css/style.default.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-fileupload.min.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-timepicker.min.css" type="text/css"/>
+    <link rel="stylesheet" href="<%=path %>/css/bootstrap/bootstrap.min.css" type="text/css"/>
     <link rel="shortcut icon" href="<%=path %>/images/favicon.ico"/>
     <script src="<%=path %>/js/jquery-2.1.4.min.js"></script>
+    <script src="<%=path %>/js/select.js"></script>
     <style type="text/css">
 
         select {
@@ -52,29 +54,6 @@
 <title>企明星考核系统</title>
 <body>
 
-<div class="mainwrapper">
-    <c:import url="../header.jsp"/>
-
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li><a href="">员工管理</a> <span class="separator"></span></li>
-            <li>查询所有员工</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
 
        <%-- <div class="pageheader">
           &lt;%&ndash;  &nbsp; &nbsp; &nbsp;&nbsp; <span> <font size="3" face="楷体" color="rgb(30, 130, 232);">选择部门:  </font> </span>
@@ -92,15 +71,7 @@
                   color="rgb(30, 130, 232);">${stusclass==null||stusclass==''?'':"当前部门为:"}</font><font size="2"
                                                                                                        face="宋体"
                                                                                                        color="red">${stusclass==null||stusclass==''?'':stusclass }&nbsp;&nbsp;</font>
-            <span> <font size="3" face="楷体" color="rgb(30, 130, 232);">选择日期:</font> </span>
-            <span class="field" id="date">
-								<select id="year" style="width:110px">
-									<option value="">选择年份</option>
-								</select>
-								<select id="month" style="width:105px">
-									<option value="">选择月份</option>
-								</select>
-						</span>
+
             <font size="3" face="宋体" color="rgb(30, 130, 232);">${term==null||term==""?'':"当前日期为:"}</font>
             <font size="2" face="宋体" color="red">${term==null?'':term }&nbsp;&nbsp;</font>
             <button class="btn" style="background-color: rgb(30, 130, 232); " onclick="fun()">查询</button>
@@ -120,22 +91,20 @@
 
 
         </div>--%>
+        <form  id="form" action="<%=path %>/assess_addAssess.action" method="post" class="form-inline">
+           <h4 >
+        <span> <font size="3" face="楷体" color="rgb(30, 130, 232);">选择日期:</font> </span>
+        <span class="field" id="date">
+								<input type="month" id="month" name="month" value="">
+						</span>
+        &nbsp; &nbsp; &nbsp; 被考核人: ${studentname} &nbsp; &nbsp; &nbsp;<a href="javascript:void(0)" class="btn btn-success" onclick="fun()" >提交考核</a></h4>
         <div class="maincontent">
-            <div class="maincontentinner">
+
 
                 <h4 class="widgettitle">员工表</h4>
-                <table id="dyntable" class="table table-bordered responsive">
-                    <colgroup>
-                        <col class="con1" style="align: center; width: 10%"/>
-                        <col class="con1" style="align: center; width:40%"/>
-                        <col class="con1" style="align: center; width: 2%"/>
-                        <col class="con1" style="align: center; width: 2%"/>
-                        <col class="con1" style="align: center; width: 2%"/>
-                        <col class="con1" style="align: center; width: 2%"/>
-                        <col class="con1" style="align: center; width: 2%"/>
-                        <col class="con1" style="align: center; width: 2%"/>
-                        <col class="con1" style="align: center; width: 10%"/>
-                    </colgroup>
+            <div class="table-responsive">
+                <table id="dyntable" class="table table-bordered text-nowrap table-condensed">
+
                     <thead>
                         <tr  >
                             <td  rowspan="2" style="text-align:center;vertical-align:middle; "><h4>考核指标</h4></td>
@@ -152,56 +121,46 @@
                             <td >0</td>
                         </tr>
 
-                    <%--<tr>
-                        <td></td>
-                        <th class="head0">全选&nbsp;<input type="checkbox" id="checkbox">&nbsp;<a
-                                href="javascript:void(0);" onclick="deletecheck()">删除</a></th>
-                        <th class="head0">考核指标</th>
-                        <th class="head1">所属部门</th>
-                        <th class="head0">员工姓名</th>
-                        <th class="head1">成绩&nbsp;&nbsp;<button onclick="fun(2)" style="width: 25px;height: 25px">▲
-                        </button>
-                            <button onclick="fun(1)" style="width: 25px;height: 25px">▼</button>
-                        </th>
-                        <input type="hidden" id="type" value="${ type}">
-                        <th class="head1">操作</th>
-                    </tr>--%>
                     </thead>
                     <tbody>
                     <c:set var="num" value="0"></c:set>
+                  <input type="hidden" name="scorde1.assess" value="1">
+                    <input type="hidden" name="scorde1.stuSysid.sysid" value="${studentid}">
                     <s:iterator value="#request.targets" var="target" status="var" >
-                        <input type="hidden" name="scorde.sysid" value="">
                         <tr>
                             <td style="text-align:center;vertical-align:middle; " rowspan="${target.assess.size()+1}" >${target.name}</td>
                         </tr>
                         <c:forEach  items="${target.assess}" var="assess" varStatus="v">
-                            <tr >
+                            <input type="hidden" name="assesslist[${num}].type" value="1">
+                            <input type="hidden" name="assesslist[${num}].target.id" value="${target.id}">
+                            <tr ><input type="hidden" name="assesslist[${num}].content" value="${assess.content}"/>
                                 <td>${assess.content}</td>
-                                <td><input type="radio" name="redio${assess.id}" value="5" onclick="rowscord(this)"/></td>
-                                <td><input type="radio" name="redio${assess.id}" value="4" onclick="rowscord(this)"/></td>
-                                <td><input type="radio" name="redio${assess.id}" value="3" onclick="rowscord(this)"/></td>
-                                <td><input type="radio" name="redio${assess.id}" value="2" onclick="rowscord(this)"/></td>
-                                <td><input type="radio" name="redio${assess.id}" value="1" onclick="rowscord(this)"/></td>
-                                <td><input type="radio" name="redio${assess.id}" value="0" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="assesslist[${num}].test1" value="5" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="assesslist[${num}].test1" value="4" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="assesslist[${num}].test1" value="3" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="assesslist[${num}].test1" value="2" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="assesslist[${num}].test1" value="1" onclick="rowscord(this)"/></td>
+                                <td><input type="radio" name="assesslist[${num}].test1" checked="checked" value="0" onclick="rowscord(this)"/></td>
                                 <td ><span class="rowcount">0</span>分</td>
                                 <c:set var="num" value="${num+1}"></c:set>
                             </tr>
                         </c:forEach>
                     </s:iterator>
-                    <tr style="text-align:center;vertical-align:middle; ">
+                  <tr style="text-align:center;vertical-align:middle; ">
                         <td colspan="2" style="text-align:center;vertical-align:middle;">部门领导评分</td>
                         <td colspan="3" style="text-align:center;vertical-align:middle;">分值</td>
-                        <td colspan="4" style="text-align:center;vertical-align:middle;"><input type="text" value="0" readonly="readonly" style="width: 20px" class="count"/>分</td>
+                        <td colspan="4" style="text-align:center;vertical-align:middle;"><input type="text" value="0" readonly="readonly" name="scorde1.shorttime" style="width: 30px;height: 20px" class="count"/>分</td>
                     </tr>
                     <tr >
                         <td colspan="2" style="text-align:center;vertical-align:middle;">总经理评分</td>
                         <td colspan="3" style="text-align:center;vertical-align:middle;">分值</td>
-                        <td colspan="4" style="text-align:center;vertical-align:middle;"><input type="text" value="0"  readonly="readonly"   style="width: 20px" class="count"/>分</td>
+                        <td colspan="4" style="text-align:center;vertical-align:middle;"><input type="text" value="0"  readonly="readonly" name="scorde1.timescore"  style="width: 30px;height: 20px" class="count"/>分</td>
                     </tr>
 
                     </tbody>
                 </table>
 
+            </div><!--maincontentinner-->
                 <br/><br/>
 
                 <div class="footer">
@@ -211,13 +170,12 @@
 
                 </div><!--footer-->
 
-            </div><!--maincontentinner-->
+
+
         </div><!--maincontent-->
 
+        </form>
 
-    </div><!--rightpanel-->
-
-</div><!--mainwrapper-->
 <script type="text/javascript">
 
     function rowscord(redio) {
@@ -315,39 +273,16 @@
 
 
     function fun(type) {
-
-        var year = $("#year option:selected").html();
-        var month = $("#month option:selected").html();
-        year = year.substring(2, 4);
-        month = month.substring(0, 2);
-        term = year + month;
-        if (term == "年份") {
-            term = "";
+        if($("#month").val()!=""){
+            $("#form").submit();
+        }else{
+            alert("请选择时间")
         }
-        if (term == "选择") {
-            term = "";
-        }
-        if (term == "年份选择") {
-            term = "";
-        }
-        three = $("#span #selectthree").val();
-        two = $("#selecttwo").val();
-        val = two;
-        if (three == null || three == "") {
 
-        } else {
-            val = three;
-        }
-        if (type != null && type != "") {
-            window.document.location.href = "${pageContext.request.contextPath}/studentAssessQuery?&term=${term}&sclass=${stusclass}&name=${name}&type=" + type;
-        } else {
-
-            window.document.location.href = "${pageContext.request.contextPath}/studentAssessQuery?term=" + term + "&sclass=" + val + "&name=" + $("#name").val();
-
-
-        }
     };
-
+   /* $(function () {
+        $("#date").selectDate();
+    })*/
 
 </script>
 

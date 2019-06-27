@@ -23,7 +23,7 @@ public class StudentAddAction extends ActionSupport {
      */
     private static final long serialVersionUID = 1L;
     private String studentName;//姓名
-    private String password;//身份证
+    private String password;//密码
     private String sclass;//部门
     private String term;//日期
     private String sclassone;

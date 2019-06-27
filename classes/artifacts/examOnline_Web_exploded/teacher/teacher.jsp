@@ -1,96 +1,236 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="c" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
 
-<link rel="stylesheet" href="<%=path %>/css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="<%=path %>/css/responsive-tables.css">
-<link rel="shortcut icon" href="<%=path %>/images/favicon.ico"/>
-<script type="text/javascript" src="<%=path %>/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/jquery-migrate-1.1.1.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/jquery-ui-1.9.2.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/jquery.uniform.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="<%=path %>/js/modernizr.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/responsive-tables.js"></script>
-<script type="text/javascript" src="<%=path %>/js/custom.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        // dynamic table
-        jQuery('#dyntable').dataTable({
-            "sPaginationType": "full_numbers",
-            "aaSortingFixed": [[0,'asc']],
-            "fnDrawCallback": function(oSettings) {
-                jQuery.uniform.update();
-            }
-        });
-        
-        jQuery('#dyntable2').dataTable( {
-            "bScrollInfinite": true,
-            "bScrollCollapse": true,
-            "sScrollY": "300px"
-        });
-        
-    });
-</script>
-<title>企明星考核系统</title>
+    <title>企明星考核系统</title>
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="<%=path %>/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=path %>/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=path %>/admin/css/animate.css" rel="stylesheet">
+    <link href="<%=path %>/admin/css/style.css?v=4.1.0" rel="stylesheet">
 </head>
-<body>
-<div class="mainwrapper">
-		<c:include value="header.jsp"/>
 
-
-     <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
-
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
-
-
-
-        <div class="maincontent" style="">
-            <div class="maincontentinner" style="width: 93% ;height:100px">
-                           <img alt="" height="50%" width="100%" src="<%=path %>/images/chengjian.jpg" >
-
-                <br /><br />
-
-                <div class="footer" >
-                    <div class="footer-left">
-                        <span>&copy; 2019. 企明星考核系统.</span>
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs" style="font-size:20px;">
+                                        <i class="fa fa-area-chart"></i>
+                                        <strong class="font-bold">企明星</strong>
+                                    </span>
+                                </span>
+                        </a>
                     </div>
+                    <div class="logo-element">企明星
+                    </div>
+                </li>
+                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                    <span class="ng-scope">分类</span>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="<%=path %>/teacher/index.jsp">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">主页</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">
+                        <i class="fa fa fa-bar-chart-o"></i>
+                        <span class="nav-label">员工管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="<%=path %>/teacher/studentAdd.jsp">添加员工</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="<%=path %>/teacher/studentQuery.action">查询员工考试分数</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="<%=path %>/teacher/studentAssessQuery.action">查询员工考核分数</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="<%=path %>/target_query.action">查询考核指标</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="<%=path %>/teacher/studentJfree.jsp">显示部门柱状图</a>
+                        </li>
 
-                </div><!--footer-->
+                    </ul>
+                </li>
+                <li class="line dk"></li>
+                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                    <span class="ng-scope">分类</span>
+                </li>
+                <li>
+                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">试题管理 </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="<%=path %>/teacher/subjectAdd.jsp">添加试题</a>
+                        </li>
+                        <li><a class="J_menuItem" href="<%=path %>/teacher/querySubject.action">查询所有试题</a>
+                        </li>
+                        <li><a class="J_menuItem" href="<%=path %>/teacher/subjectQuery.jsp">搜索试题</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="line dk"></li>
+                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                    <span class="ng-scope">分类</span>
+                </li>
+                <li>
+                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">试题管理 </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="<%=path %>/teacher/bigtype_query.action">一级分类</a>
+                        </li>
+                        <li><a class="J_menuItem" href="<%=path %>/teacher/centre_query.action">二级分类</a>
+                        </li>
+                        <li><a class="J_menuItem" href="<%=path %>/teacher/small_query.action">三级分类</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="line dk"></li>
 
-            </div><!--maincontentinner-->
-        </div><!--maincontent-->
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                        <div class="form-group">
+                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+              <%--  <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                        </a>
+                        &lt;%&ndash;  <ul class="dropdown-menu dropdown-messages">
+                              <li class="m-t-xs">
+                                  <div class="dropdown-messages-box">
+                                      <a href="profile.html" class="pull-left">
+                                          <img alt="image" class="img-circle" src="img/a7.jpg">
+                                      </a>
+                                      <div class="media-body">
+                                          <small class="pull-right">46小时前</small>
+                                          <strong>小四</strong> 是不是只有我死了,你们才不骂爵迹
+                                          <br>
+                                          <small class="text-muted">3天前 2014.11.8</small>
+                                      </div>
+                                  </div>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                  <div class="dropdown-messages-box">
+                                      <a href="profile.html" class="pull-left">
+                                          <img alt="image" class="img-circle" src="img/a4.jpg">
+                                      </a>
+                                      <div class="media-body ">
+                                          <small class="pull-right text-navy">25小时前</small>
+                                          <strong>二愣子</strong> 呵呵
+                                          <br>
+                                          <small class="text-muted">昨天</small>
+                                      </div>
+                                  </div>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                  <div class="text-center link-block">
+                                      <a class="J_menuItem" href="mailbox.html">
+                                          <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+                                      </a>
+                                  </div>
+                              </li>
+                          </ul>&ndash;%&gt;
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                &lt;%&ndash; <a href="mailbox.html">
+                                     <div>
+                                         <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
+                                         <span class="pull-right text-muted small">4分钟前</span>
+                                     </div>
+                                 </a>&ndash;%&gt;
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                &lt;%&ndash;<a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-qq fa-fw"></i> 3条新回复
+                                        <span class="pull-right text-muted small">12分钟钱</span>
+                                    </div>
+                                </a>&ndash;%&gt;
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a class="J_menuItem" href="notifications.html">
+                                        <strong>查看所有 </strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>--%>
+            </nav>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe id="J_iframe" width="100%" height="100%" src="<%=path %>/teacher/index.jsp" frameborder="0" data-id="index_v1.html" seamless="no"></iframe>
+        </div>
+    </div>
+    <!--右侧部分结束-->
+</div>
 
-    </div><!--rightpanel-->
+<!-- 全局js -->
+<script src="<%=path %>/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=path %>/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=path %>/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=path %>/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=path %>/admin/js/plugins/layer/layer.min.js"></script>
 
-</div><!--mainwrapper-->
-	
+<!-- 自定义js -->
+<script src="<%=path %>/admin/js/hAdmin.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=path %>/admin/js/index.js"></script>
+
+<!-- 第三方插件 -->
+<script src="<%=path %>/admin/js/plugins/pace/pace.min.js"></script>
+
 </body>
+
 </html>

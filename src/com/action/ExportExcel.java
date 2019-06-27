@@ -30,6 +30,16 @@ public class ExportExcel extends ActionSupport {
     private String sclass;//部门
     private String type = "1";//1为升序,2为降序
     private String name;
+    private String assess;
+
+    public String getAssess() {
+        return assess;
+    }
+
+    public void setAssess(String assess) {
+        this.assess = assess;
+    }
+
     private StudentService studentService = new StudentServiceImpl();
 
     public String getType() {
@@ -97,17 +107,19 @@ public class ExportExcel extends ActionSupport {
                 name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
                 condition.setName(name);
             }
+            if (assess != null && !assess.equals("")) {
+                condition.setAssess(assess);
+                //forClass.add(Restrictions.like("studentName", "%"+name+"%"));
+            }
             List<Scorde> list = studentService.exportExcel(condition);
             if (list.size() > 0) {
                 XSSFWorkbook hw = new XSSFWorkbook();
-                XSSFSheet createSheet = hw.createSheet("员工");
+                XSSFSheet createSheet= hw.createSheet("员工");
                 XSSFRow Row = createSheet.createRow(0);
                 Row.createCell(0).setCellValue("员工排名");
-                Row.createCell(1).setCellValue("员工学号");
                 Row.createCell(2).setCellValue("员工姓名");
                 Row.createCell(3).setCellValue("员工部门");
                 Row.createCell(4).setCellValue("员工成绩");
-                createSheet.setColumnWidth(1, 5000);
                 createSheet.setColumnWidth(2, 4000);
                 createSheet.setColumnWidth(3, 4000);
                 createSheet.setColumnWidth(4, 3000);
@@ -116,14 +128,19 @@ public class ExportExcel extends ActionSupport {
 
                     createRow.createCell(0).setCellValue(i + 1);
                     createRow.createCell(2).setCellValue(list.get(i).getStuSysid().getStudentName());
-                    createRow.createCell(1).setCellValue(list.get(i).getStuSysid().getStudentID());
                     createRow.createCell(3).setCellValue(list.get(i).getStuSysid().getSclass());
                     createRow.createCell(4).setCellValue(list.get(i).getTimescore());
                 }
                 OutputStream output = response.getOutputStream();
                 response.reset();
                 response.setContentType("");
-                response.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode("员工.xlsx", "UTF-8"));
+                String trm="员工.xlsx";
+                if(assess.equals("0")){
+                    trm = term==null?"":term+"员工考试表.xlsx";
+                }else{
+                   trm = term==null?"":term+"员工考核表.xlsx";
+                }
+                response.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(trm, "UTF-8"));
                 response.setContentType("application/msexcel");
                 hw.write(output);
                 output.close();

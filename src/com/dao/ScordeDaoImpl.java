@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.util.BootstrapTable;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -16,7 +17,7 @@ import com.entity.Scorde;
 import com.entity.Student;
 import com.util.HibernateSessionFactory;
 
-public class ScordeDaoImpl implements ScordeDao{
+public class ScordeDaoImpl extends BaseDaoImpl implements ScordeDao{
 
 	@Override
 	public Scorde findEndScorde(Student student) {
@@ -41,19 +42,22 @@ public class ScordeDaoImpl implements ScordeDao{
 	}
 
 	@Override
-	public void saveScorde(Scorde studentScorde) {
+	public int saveScorde(Scorde studentScorde) {
 		Session session = HibernateSessionFactory.getSession();
 		Transaction beginTransaction = session.beginTransaction();
+		Integer save = null;
 		try {
-			
-			Serializable save = session.save(studentScorde);
+
+            Serializable save1 = session.save(studentScorde);
+             save=(Integer) save1;
 			beginTransaction.commit();
 		} catch (Exception e) {
 			new Exception("储存失败");
 		}finally{
 			session.close();
 		}
-	}
+        return save;
+    }
 
 	//查询最近一次考试成绩
 	@Override
@@ -107,6 +111,35 @@ public class ScordeDaoImpl implements ScordeDao{
 		}finally{
 			session.close();
 		}
+	}
+
+    @Override
+    public Scorde findByid(Scorde scorde, int scordeId) {
+        Session session = HibernateSessionFactory.getSession();
+        Object returnObject = null;
+        returnObject = session.get(scorde.getClass(), scordeId);
+        HibernateSessionFactory.closeSession();
+        return (Scorde) returnObject;
+    }
+
+	@Override
+	public int getByCriteriaCount(DetachedCriteria detachedCriteria) {
+		Session session = HibernateSessionFactory.getSession();
+		Criteria executableCriteria = detachedCriteria.getExecutableCriteria(session);
+		List<Integer> list = executableCriteria.list();
+		HibernateSessionFactory.closeSession();
+		return list.get(0);
+	}
+
+	@Override
+	public List<Scorde> getByCriteria(DetachedCriteria detachedCriteria, BootstrapTable table) {
+		Session session = HibernateSessionFactory.getSession();
+		Criteria executableCriteria = detachedCriteria.getExecutableCriteria(session);
+		executableCriteria.setMaxResults(table.getLimit());
+		executableCriteria.setFirstResult(table.getOffset());
+		List<Scorde> list = executableCriteria.list();
+		session.close();
+		return list;
 	}
 
 

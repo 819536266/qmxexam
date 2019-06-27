@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.entity.Small" lazy="false" table="db_small">
         <!--  id -->
-        <id name="smallId" column="small_id">
+        <id name="smallId" column="small_id" type="int">
             <!-- 主键生成策略 -->
             <generator class="native"></generator>
         </id>

@@ -59,38 +59,14 @@
 <title>老师登陆成功</title>
 <body>
 
-<div class="mainwrapper">
-
-    <s:include value="header.jsp"/>
-
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li><a href="table-static.html">员工管理</a> <span class="separator"></span></li>
-            <li>解析Word</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
-
         <div class="maincontent">
-            <div class="maincontentinner">
+
 
                 <h4 class="widgettitle">试题库</h4>
                 <hr>
                 <font size="5" color="red">查看是否解析正确,如过错误请按照格式修改文档!</font>
-                <table id="dyntable" class="table table-bordered responsive">
+            <div class="table-responsive">
+                <table id="dyntable" class="table-hover table-bordered text-nowrap">
 
                     <tbody>
 
@@ -150,6 +126,7 @@
                     </s:iterator>
                     </tbody>
                 </table>
+            </div>
                 <div style="margin: auto; width: 300; height: 100">
                     <a href="<%=path %>/teacher/subjectWord.jsp">
                         <button> 返回添加页面</button>
@@ -160,20 +137,10 @@
                 </div>
                 <br/><br/>
 
-                <div class="footer" >
-                    <div class="footer-left">
-                        <span>&copy; 2019. 企明星考核系统.</span>
-                    </div>
 
-                </div><!--footer-->
 
-            </div><!--maincontentinner-->
         </div><!--maincontent-->
 
-
-    </div><!--rightpanel-->
-
-</div><!--mainwrapper-->
 
 </body>
 </html>

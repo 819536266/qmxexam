@@ -29,10 +29,8 @@ public class BaseDaoImpl implements BaseDao {
         Session session = HibernateSessionFactory.getSession();
         Object returnObject = null;
         returnObject = session.get(object.getClass(), id);
-        Target target=(Target)returnObject;
-        System.out.println(target.getAssess());
-            HibernateSessionFactory.closeSession();
-        return target;
+        HibernateSessionFactory.closeSession();
+        return returnObject;
     }
 
     @Override

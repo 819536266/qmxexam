@@ -113,30 +113,6 @@
 </head>
 <body>
 
-<div class="mainwrapper">
-    <c:include value="header.jsp"/>
-
-
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li>员工管理 <span class="separator"></span></li>
-            <li>添加员工</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
 
 
         <div class="maincontent" style="">
@@ -241,30 +217,29 @@
                                  <span id="txt"></span><!-- 验证 -->
                              </span>  --%>
 
-                            <label>身份证号：</label>
+                            <label>密码：</label>
                             <span class="field">
                       			<input type="text" name="password" class="input-xlarge" style="width:215px"
-                                       placeholder="请输入..." required="required" onkeyup="showStatus(this.value)"/>
-                            	<span id="txt"></span><!-- 验证 -->
+                                       placeholder="请输入..." required="required" />
+                            <!-- 验证 -->
                             </span>
 
                             <label>员工姓名：</label>
                             <span class="field"><input type="text" name="studentName" style="width:215px"
                                                        class="input-xlarge" placeholder="请输入..."
-                                                       required="required"/></span>
+                                                       required="required" onkeyup="showStatus(this.value)"/><span id="txt"></span></span>
 
 
                             <p class="stdformbutton">
                                 <input class="btn btn-primary" type="submit" value="录入" style="width:100px">
+                                <a href="<%=path %>/teacher/studentExcel.jsp">
+                                    <button type="button" class="btn btn-primary">Excel录入</button>
+                                </a>
                             </p>
 
 
                         </form>
-                        <div style="width: 200px;margin-left: 220px">
-                            <a href="<%=path %>/teacher/studentExcel.jsp">
-                                <button class="btn btn-primary">Excel录入</button>
-                            </a>
-                        </div>
+
                     </div><!--widgetcontent-->
                 </div><!--widget-->
 
@@ -279,10 +254,6 @@
 
             </div><!--maincontentinner-->
         </div><!--maincontent-->
-
-    </div><!--rightpanel-->
-
-</div><!--mainwrapper-->
 
 <script type="text/javascript">
 
@@ -306,7 +277,7 @@
         id= $("#selecttwo").find("option:selected").attr("na");
         $("#sclassone").val(id);
         $("#kind").val(selecttwo);
-        if ($("#txt").html() == "员工编号已存在!请重新输入!" || $("#txt1").html() == "身份证号已存在!请重新输入!") {
+        if ($("#txt").html() == "员工编号已存在!请重新输入!" || $("#txt1").html() == "用户名已存在!请重新输入!") {
             return false;
         }
     });

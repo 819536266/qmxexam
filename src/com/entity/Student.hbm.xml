@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.entity.Student" lazy="false" table="db_student">
         <!-- student id -->
-        <id name="sysid" column="sysid">
+        <id name="sysid" column="sysid" type="java.lang.Integer">
             <!-- 主键生成策略 -->
             <generator class="native"></generator>
         </id>

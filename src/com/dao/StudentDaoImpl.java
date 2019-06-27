@@ -210,13 +210,14 @@ public class StudentDaoImpl extends BaseDaoImpl implements StudentDao {
 			scorde.setTimescore((Integer) objects[2]);
 			scorde.setCount((Integer) objects[3]);
 			scorde.setTesttime((Date) objects[4]);
+			scorde.setShorttime((Integer) objects[6]);
 			scorde.setAssess((String) objects[5]);
-			student.setSysid((Integer) objects[6]);
-			student.setStudentName((String) objects[7]);
-			student.setPassword((String) objects[8]);
-			student.setStudentID((String) objects[9]);
-			student.setSclass((String) objects[10]);
-			student.setTerm((String) objects[11]);
+			student.setSysid((Integer) objects[7]);
+			student.setStudentName((String) objects[8]);
+			student.setPassword((String) objects[9]);
+			student.setStudentID((String) objects[10]);
+			student.setSclass((String) objects[11]);
+			student.setTerm((String) objects[12]);
 			student.getSr().add(scorde);
 			scorde.setStuSysid(student);
 			arrayList.add(scorde);
@@ -400,7 +401,7 @@ public class StudentDaoImpl extends BaseDaoImpl implements StudentDao {
 		HibernateSessionFactory.closeSession();
 		return list;
 	}
-	//根据身份证查找
+	//根据密码查找
 	@Override
 	public Student findByPassword(String password) {
 		Session session = HibernateSessionFactory.getSession();
@@ -460,52 +461,77 @@ public class StudentDaoImpl extends BaseDaoImpl implements StudentDao {
 	@Override
 	public List<Scorde> exportExcel(Condition condition) {
 		Session session = HibernateSessionFactory.getSession();
-		SQLQuery createSQLQuery =null;
-		String hql=null;
 		String type="desc";
-		if(condition.getType().equals("2")){
-				type="asc";
+		if(condition.getType()!=null&&condition.getType().equals("2")){
+			type="asc";
 		}
-		if(condition.getTerm()!=null && condition.getSclass()!=null && condition.getName()!=null){
-			 hql="select  *"+
-					"from db_student_scorde as db inner join "+
-					"(select stu.sysid as stuid ,stu.studentName as stuName,stu.`password` as stupass,stu.studentID as sID ,stu.sclass as stusclass,stu.term as stuterm  , MAX(con.count) as time"+ 
-					 " from  db_student stu inner join db_student_scorde con on stu.sysid=con.stu_sysid "+
-					"where stu.sclass=? and stu.term=? and stu.studentName like ? group by stu.sysid) as st "+
-					"on st.stuid=db.stu_sysid and st.time=db.count ORDER BY db.score "+type;
-			 
-			  createSQLQuery = session.createSQLQuery(hql);
-			 createSQLQuery.setParameter(0, condition.getSclass());
-			 createSQLQuery.setParameter(1, condition.getTerm());
-			 createSQLQuery.setParameter(2, "%"+condition.getName()+"%");
-		}else if(condition.getName()!=null&&condition.getTerm()==null && condition.getSclass()==null){
-			hql="select *"+
-					" from db_student_scorde as db inner join "+
-					"(select stu.sysid as stuid ,stu.studentName as stuName,stu.`password` as stupass,stu.studentID as sID ,stu.sclass as stusclass,stu.term as stuterm  , MAX(con.count) as time"+ 
-					 " from  db_student stu inner join db_student_scorde con on stu.sysid=con.stu_sysid "+
-					"where  stu.studentName like ? group by stu.sysid) as st "+
-					"on st.stuid=db.stu_sysid and st.time=db.count ORDER BY db.score "+type;
-			createSQLQuery = session.createSQLQuery(hql);
-			 createSQLQuery.setParameter(0, "%"+condition.getName()+"%");
-		}else if(condition.getTerm()!=null && condition.getSclass()!=null&&condition.getName()==null){
-			hql="select *"+
-					" from db_student_scorde as db inner join "+
-					"(select stu.sysid as stuid ,stu.studentName as stuName,stu.`password` as stupass,stu.studentID as sID ,stu.sclass as stusclass,stu.term as stuterm  , MAX(con.count) as time"+ 
-					 " from  db_student stu inner join db_student_scorde con on stu.sysid=con.stu_sysid "+
-					"where stu.sclass=? and stu.term=?   group by stu.sysid) as st "+
-					"on st.stuid=db.stu_sysid and st.time=db.count ORDER BY db.score "+type;
-			createSQLQuery = session.createSQLQuery(hql);
-			 createSQLQuery.setParameter(0, condition.getSclass());
-			 createSQLQuery.setParameter(1, condition.getTerm());
-		}else{
-			hql="select  *"+
-					" from db_student_scorde as db inner join "+
-					"(select stu.sysid as stuid ,stu.studentName as stuName,stu.`password` as stupass,stu.studentID as sID ,stu.sclass as stusclass,stu.term as stuterm  , MAX(con.count) as time"+ 
-					 " from  db_student stu inner join db_student_scorde con on stu.sysid=con.stu_sysid "+
-					"  group by stu.sysid) as st "+
-					"on st.stuid=db.stu_sysid and st.time=db.count ORDER BY db.score "+type;
-			createSQLQuery = session.createSQLQuery(hql);
+		String where="";
+		boolean equals = where.equals("");
+		if(condition.getSclass()!=null){
+
+			where+=" stu.sclass=? ";
 		}
+		if(condition.getAssess()!=null){
+			equals = where.equals("");
+			if(!equals){
+				where+=" and ";
+			}
+			where+=" con.assess=? ";
+		}
+
+		if(condition.getTerm()!=null){
+			equals = where.equals("");
+			if(!equals){
+				where+=" and ";
+			}
+			where+="  DATE_FORMAT( con.testtime, '%Y%m' ) = DATE_FORMAT( ? , '%Y%m' ) ";
+		}
+		if(condition.getName()!=null){
+			equals = where.equals("");
+			if(!equals){
+				where+=" and ";
+			}
+			where+="  stu.studentName like ? ";
+		}
+		equals = where.equals("");
+		String where1="";
+		if(!equals){
+			where1=" where ";
+		}
+
+		String hql="select  *"+
+				"from db_student_scorde as db inner join "+
+				"(select stu.sysid as stuid ,stu.studentName as stuName,stu.`password` as stupass,stu.studentID" +
+				" as sID ,stu.sclass as stusclass,stu.term as stuterm  , MAX(con.count) as time"+
+				" from  db_student stu inner join db_student_scorde con on stu.sysid=con.stu_sysid "+
+				where1+where+" group by stu.sysid) as st "+
+				"on st.stuid=db.stu_sysid and st.time=db.count ORDER BY db.score "+type;
+		SQLQuery createSQLQuery = session.createSQLQuery(hql);
+		int Parameter=0;
+		if(condition.getSclass()!=null){
+			createSQLQuery.setParameter(0, condition.getSclass());
+			Parameter+=1;
+		}
+		if(condition.getAssess()!=null){
+			createSQLQuery.setParameter(Parameter, condition.getAssess());
+			Parameter+=1;
+		}
+		if(condition.getTerm()!=null){
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yymm");
+			try {
+				Date parse = simpleDateFormat.parse(condition.getTerm());
+				simpleDateFormat.applyPattern("yyyy-mm-dd");
+				System.out.println(simpleDateFormat.format(parse));
+				createSQLQuery.setParameter(Parameter, simpleDateFormat.format(parse));
+				Parameter+=1;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		if(condition.getName()!=null){
+			createSQLQuery.setParameter(Parameter, "%"+condition.getName()+"%");
+		}
+
 		List<Scorde> arrayList = new ArrayList<Scorde>();
 		List<Object[]> list = createSQLQuery.list();
 		for (Object[] objects : list) {
@@ -515,18 +541,18 @@ public class StudentDaoImpl extends BaseDaoImpl implements StudentDao {
 			scorde.setTimescore((Integer) objects[2]);
 			scorde.setCount((Integer) objects[3]);
 			scorde.setTesttime((Date) objects[4]);
-			
-			student.setSysid((Integer) objects[5]);
-			student.setStudentName((String) objects[6]);
-			student.setPassword((String) objects[7]);
-			student.setStudentID((String) objects[8]);
-			student.setSclass((String) objects[9]);
-			student.setTerm((String) objects[10]);
+			scorde.setShorttime((Integer) objects[6]);
+			scorde.setAssess((String) objects[5]);
+			student.setSysid((Integer) objects[7]);
+			student.setStudentName((String) objects[8]);
+			student.setPassword((String) objects[9]);
+			student.setStudentID((String) objects[10]);
+			student.setSclass((String) objects[11]);
+			student.setTerm((String) objects[12]);
 			student.getSr().add(scorde);
 			scorde.setStuSysid(student);
 			arrayList.add(scorde);
 		}
-		
 		HibernateSessionFactory.closeSession();
 		return arrayList;
 	}

@@ -1,6 +1,8 @@
 package com.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 成绩
@@ -18,12 +20,44 @@ public class Scorde {
 
     private Date testtime;//当此考试提交时间
 
+    private Integer shorttime;//临时分数
+
+    private Set<Assess> set=new HashSet<>();
+
+
+
+    public Set<Assess> getSet() {
+        return set;
+    }
+
+    public void setSet(Set<Assess> set) {
+        this.set = set;
+    }
+
     public Scorde(Student stuSysid, Integer timescore, String assess, Integer count, Date testtime) {
         this.stuSysid = stuSysid;
         this.timescore = timescore;
         this.assess = assess;
         this.count = count;
         this.testtime = testtime;
+    }
+
+    public Scorde(int scordeId, Student stuSysid, Integer timescore, String assess, Integer count, Date testtime, Integer shorttime) {
+        this.scordeId = scordeId;
+        this.stuSysid = stuSysid;
+        this.timescore = timescore;
+        this.assess = assess;
+        this.count = count;
+        this.testtime = testtime;
+        this.shorttime = shorttime;
+    }
+
+    public Integer getShorttime() {
+        return shorttime;
+    }
+
+    public void setShorttime(Integer shorttime) {
+        this.shorttime = shorttime;
     }
 
     public Scorde() {
@@ -87,6 +121,7 @@ public class Scorde {
                 ", assess='" + assess + '\'' +
                 ", count=" + count +
                 ", testtime=" + testtime +
+                ", shorttime=" + shorttime +
                 '}';
     }
 }

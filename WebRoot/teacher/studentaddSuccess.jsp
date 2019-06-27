@@ -39,29 +39,6 @@
 	<title>老师登陆成功</title>
 <body>
 
-<div class="mainwrapper">
-
-    <c:include value="header.jsp"/>
-    
-    <div class="rightpanel">
-        
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
-            <li><a href="table-static.html"></a> <span class="separator"></span></li>
-            <li></li>
-            
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
        
           <div class="maincontent">
             <div class="maincontentinner">
@@ -82,11 +59,7 @@
             
             </div><!--maincontentinner-->
         </div><!--maincontent-->
-        
-        
-         </div><!--rightpanel-->
-    
-</div><!--mainwrapper-->
+
 
 </body>
 </html>

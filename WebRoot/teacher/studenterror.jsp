@@ -57,30 +57,6 @@
 <title>老师登陆成功</title>
 <body>
 
-<div class="mainwrapper">
-
-    <c:include value="header.jsp"/>
-
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li><a href="table-static.html">员工管理</a> <span class="separator"></span></li>
-            <li>解析Excel</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
 
         <div class="maincontent">
             <div class="maincontentinner">
@@ -93,7 +69,7 @@
                     <tbody>
 
                     <div style="width:400px;margin: auto;" id="id">
-                        <font size="5" color="red">添加失败,查看身份证是否重复!</font>
+                        <font size="5" color="red">添加失败,查看用户名是否重复!</font>
                         <s:iterator value="#request.excellist" var="stu" status="ls">
                             <p>
                                 <font size="4" face="楷体">员工姓名:
@@ -129,7 +105,6 @@
 
         </div><!--rightpanel-->
 
-    </div><!--mainwrapper-->
 
 </body>
 </html>

@@ -11,7 +11,7 @@ import com.util.MD5;
  */
 public class Student {
     private Integer sysid;//系统编号、primary Key
-    private String studentID;//身份证
+    private String studentID;//密码
     private String password;//密码
     private String studentName;//员工名字
     private String sclass;//部门

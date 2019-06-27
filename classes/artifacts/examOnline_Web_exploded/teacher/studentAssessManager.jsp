@@ -14,7 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>企明星考核系统</title>
-
+    <link rel="stylesheet" href="<%=path %>/css/bootstrap/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/style.default.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-fileupload.min.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-timepicker.min.css" type="text/css"/>
@@ -52,100 +52,61 @@
 </head>
 <title>企明星考核系统</title>
 <body>
+<div class="form-inline">
+<div class="form-group" id="span">
+    <label for="selectone">选择部门:</label>
+    <select class="form-control" id="selectone" onchange="fun1()"></select>
+    <select class="form-control"  name="scalss" id="selecttwo" onchange="fun2()"></select>
+</div>
+<label>
+    <font size="3" face="宋体" color="rgb(30, 130, 232);">${stusclass==null||stusclass==''?'':"当前部门为:"}</font>
+    <font size="2" face="宋体"  color="red">${stusclass==null||stusclass==''?'':stusclass }&nbsp;&nbsp;</font>
+</label>
 
-<div class="mainwrapper">
+<div class="form-group">
+    <label for="year">选择日期:</label>
+    <select id="year" class="form-control" >
+        <option value="">选择年份</option>
+    </select>
+    <select id="month" class="form-control" >
+        <option value="">选择月份</option>
+    </select>
+    <label>
+        <font size="3" face="宋体" color="rgb(30, 130, 232);">${term==null||term==""?'':"当前日期为:"}</font>
+        <font size="2" face="宋体"  color="red">${term==null?'':term }&nbsp;&nbsp;</font>
+    </label>
+</div>
 
-    <c:include value="header.jsp"/>
-
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li><a href="">员工管理</a> <span class="separator"></span></li>
-            <li>查询所有员工</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <div class="pageheader">
-            &nbsp; &nbsp; &nbsp;&nbsp; <span> <font size="3" face="楷体" color="rgb(30, 130, 232);">选择部门:  </font> </span>
-            <span class="field" id="span">
-                                    <select class="form-control"  id="selectone" onchange="fun1()" style="width:110px"></select>
-                                    <select class="form-control"  name="scalss" id="selecttwo" onchange="fun2()" style="width:110px">
-                                    </select>
-                                </span>
-            </span>
-
-            <!--  -->
-            <font size="3" face="宋体"
-                  color="rgb(30, 130, 232);">${stusclass==null||stusclass==''?'':"当前部门为:"}</font><font size="2"
-                                                                                                       face="宋体"
-                                                                                                       color="red">${stusclass==null||stusclass==''?'':stusclass }&nbsp;&nbsp;</font>
-
-
-            <span> <font size="3" face="楷体" color="rgb(30, 130, 232);">选择日期:</font> </span>
-            <span class="field" id="date">
-								<select id="year" style="width:110px">
-									<option value="">选择年份</option>
-								</select>
-								<select id="month" style="width:105px">
-									<option value="">选择月份</option>
-								</select>
-						</span>
-            <font size="3" face="宋体" color="rgb(30, 130, 232);">${term==null||term==""?'':"当前日期为:"}</font>
-            <font size="2" face="宋体"  color="red">${term==null?'':term }&nbsp;&nbsp;</font>
-            <button class="btn" style="background-color: rgb(30, 130, 232); " onclick="fun()">查询</button>
-            &nbsp; &nbsp; &nbsp;&nbsp;<button class="btn" style="background-color: rgb(30, 130, 232);" onclick="funexcel()">导出Excel</button>
-            <form method="get" action="${pageContext.request.contextPath}/studentAssessQuery">
-                &nbsp; &nbsp; &nbsp;&nbsp;<span> <font size="3" face="楷体" color="rgb(30, 130, 232);">输入姓名查询:</font> </span>
-                <input type="text" value="${name }" name="name" id="name">
-                <input type="submit"  class="btn" style="background-color: rgb(30, 130, 232);" value="查询">
-            </form>
-
-
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <!-- 到处excel -->
-
-
+<div class="form-group">
+    <a class="btn btn-md" onclick="fun()">查询</a>
+    <a class="btn btn-md" onclick="funexcel()">导出Excel</a>
+</div>
+<form method="get" action="${pageContext.request.contextPath}/studentAssessQuery" class="form-inline">
+    <div class="form-group">
+        <label for="name">输入姓名查询:</label>
+        <input type="text"class="form-control" name="name" id="name"  value="${name}" />
+        <input type="submit"  class="btn" style="background-color: rgb(30, 130, 232);" value="查询"/>
+    </div>
+</form>
 
 
         </div>
         <div class="maincontent">
-            <div class="maincontentinner">
-
                 <h4 class="widgettitle">员工表</h4>
-                <table id="dyntable" class="table table-bordered responsive">
-                    <colgroup>
-                        <col class="con0" style="align: center; width: 10%"/>
-
-                        <col class="con0" style="align: center; width: 15%"/>
-                        <col class="con1" style="align: center; width: 15%"/>
-                        <col class="con0" style="align: center; width: 15%"/>
-                        <col class="con1"/>
-                    </colgroup>
+            <div class="table-responsive">
+                <table id="dyntable" class="table table-hover table-bordered text-nowrap table-condensed">
                     <thead>
                     <tr>
-                        <th class="head0">全选&nbsp;<input  type="checkbox" id="checkbox">&nbsp;<a href="javascript:void(0);" onclick="deletecheck()">删除</a></th>
-                        <th class="head0">员工编号</th>
-                        <th class="head1">所属部门</th>
-                        <th class="head0">员工姓名</th>
-                        <th class="head1">成绩&nbsp;&nbsp;<button onclick="fun(2)" style="width: 25px;height: 25px">▲
+                        <th >全选&nbsp;<input  type="checkbox" id="checkbox">&nbsp;<a href="javascript:void(0);" onclick="deletecheck()">删除</a></th>
+                        <th >员工编号</th>
+                        <th >所属部门</th>
+                        <th >员工姓名</th>
+                        <th >成绩&nbsp;&nbsp;<button onclick="fun(2)" style="width: 25px;height: 25px">▲
                         </button>
                             <button onclick="fun(1)" style="width: 25px;height: 25px">▼</button>
                         </th>
                         <input type="hidden" id="type" value="${ type}">
-                        <th class="head1">操作</th>
+                        <th >操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -161,12 +122,14 @@
                                 String  studentname=new String(scorde.getStuSysid().getStudentName().getBytes("utf-8"),"utf-8") ;
                                 request.setAttribute("studentname",studentname);
                             %>
-                            <td><a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看所有</a>&nbsp;&nbsp;&nbsp;
-                                <a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看本次</a>&nbsp;&nbsp;&nbsp;
-                                <a href="studentupdate?sysid=${student.stuSysid.sysid}">修改</a>&nbsp;&nbsp;&nbsp;
+                            <td>
+                                <a  href="${pageContext.request.contextPath}/target_queryByUserId.action?Student.sysid=${student.stuSysid.sysid}">考核</a>&nbsp;&nbsp;&nbsp;
+                                <a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看所有</a>&nbsp;&nbsp;&nbsp;
+                                <a href="${pageContext.request.contextPath}/target_queryByUserIdAndScordeId.action?Student.sysid=${student.stuSysid.sysid}&scorde.scordeId=${student.scordeId}">查看本次</a>&nbsp;&nbsp;&nbsp;
+                                <%--<a href="studentupdate?sysid=${student.stuSysid.sysid}">修改</a>&nbsp;&nbsp;&nbsp;--%>
                                 <a id="deletestudent" onclick="deleteJobDetail(${student.stuSysid.sysid})">删除</a>&nbsp;&nbsp;&nbsp;
                                 <%--<a  href="Scordeadd.jsp?sysid=${student.stuSysid.sysid}&assess=1&studentName=${studentname}">添加考核</a>--%>
-                                <a  href="${pageContext.request.contextPath}/target_queryByUserId.action?Student.sysid=${student.stuSysid.sysid}">添加考核</a>
+
                             </td>
                         </tr>
                     </s:iterator>
@@ -193,7 +156,7 @@
 
                     </tbody>
                 </table>
-
+            </div>
                 <br/><br/>
 
                 <div class="footer" >
@@ -203,13 +166,9 @@
 
                 </div><!--footer-->
 
-            </div><!--maincontentinner-->
+           <!--maincontentinner-->
         </div><!--maincontent-->
-
-
-    </div><!--rightpanel-->
-
-</div><!--mainwrapper-->
+</div>
 <script type="text/javascript">
     function deletecheck(){
         var check=new Array();
@@ -345,7 +304,7 @@
 </script>
 <script type="text/javascript">
     function funexcel() {
-        window.location.href = "${pageContext.request.contextPath}/exportExcel?&term=${term}&sclass=${stusclass}&name=${name}";
+        window.location.href = "${pageContext.request.contextPath}/exportExcel?&term=${term}&sclass=${stusclass}&name=${name}&assess=1";
     }
 
     function deleteJobDetail(id) {

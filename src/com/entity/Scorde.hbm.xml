@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.entity.Scorde" lazy="false" table="db_student_scorde">
         <!-- student id -->
-        <id name="scordeId" column="id">
+        <id name="scordeId" column="id" type="int">
             <!-- 主键生成策略 -->
             <generator class="native"></generator>
         </id>
@@ -17,10 +17,14 @@
         <property name="timescore" column="score"></property>
 
         <property name="assess" column="assess"></property>
+        <property name="shorttime" column="shorttime"></property>
         <!-- 考试次数 -->
         <property name="count" column="count"></property>
         <!-- 考试时间-->
         <property name="testtime" column="testtime"></property>
-
+        <set name="set" cascade="delete"  inverse="true" >
+            <key column="scorde"></key>
+            <one-to-many class="com.entity.Assess"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

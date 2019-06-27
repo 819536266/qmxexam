@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<%=path %>/css/style.default.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-fileupload.min.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-timepicker.min.css" type="text/css"/>
+    <link rel="stylesheet" href="<%=path %>/css/bootstrap/bootstrap.min.css" type="text/css"/>
     <link rel="shortcut icon" href="<%=path %>/images/favicon.ico"/>
     <script type="text/javascript" src="<%=path %>/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="<%=path %>/js/jquery-migrate-1.1.1.min.js"></script>
@@ -38,31 +39,8 @@
 <title>老师登陆成功</title>
 <body>
 
-<div class="mainwrapper">
-    <s:include value="header.jsp"/>
 
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li>员工管理 <span class="separator"></span></li>
-            <li>查询所有员工</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <div class="maincontent">
+        <div class="maincontent form-inline">
             <br>
             &nbsp; &nbsp; &nbsp;&nbsp; <span> <font size="6" face="楷体"
                                                     color="rgb(30, 130, 232);">选择部门查询:  </font> </span><span class="field" id="span">
@@ -77,30 +55,22 @@
             <button class="btn" style="background-color: rgb(30, 130, 232); " onclick="fun()">查询</button>
             </a>
 
-            <div class="maincontentinner">
+
 
                 <h4 class="widgettitle">试题库</h4>
-                <table id="dyntable" class="table table-bordered responsive">
-                    <colgroup>
-                        <col class="con0" style="align: center; width: 15%"/>
+            <div class="table-responsive">
+                <table id="dyntable" class="table table-hover table-bordered text-nowrap">
 
-                        <col class="con0" style="align: center; width: 15%"/>
-                        <col class="con1" style="align: center; width: 15%"/>
-                        <col class="con0" style="align: center; width: 15%"/>
-                        <col class="con1"/>
-                        <col class="con0" style="align: center; width: 15%"/>
-                        <col class="con1"/>
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th class="head0">全选&nbsp;<input  type="checkbox" id="checkbox">&nbsp;<a href="javascript:void(0);" onclick="deletecheck()">删除</a></th>
-                        <th class="head0">试题编号</th>
-                        <th class="head0">部门</th>
-                        <th class="head1">试题标题</th>
-                        <th class="head0">正确答案</th>
-                        <th class="head1">查看试题</th>
-                        <th class="head0">更新试题</th>
-                        <th class="head1">删除试题</th>
+                        <th >全选&nbsp;<input  type="checkbox" id="checkbox">&nbsp;<a href="javascript:void(0);" onclick="deletecheck()">删除</a></th>
+                        <th >试题编号</th>
+                        <th >部门</th>
+                        <th >试题标题</th>
+                        <th >正确答案</th>
+                        <th >查看试题</th>
+                        <th >更新试题</th>
+                        <th >删除试题</th>
                     </tr>
 
                     </thead>
@@ -165,23 +135,14 @@
 
                     </tbody>
                 </table>
-
+            </div><!--maincontentinner-->
                 <br/><br/>
 
-                <div class="footer" >
-                    <div class="footer-left">
-                        <span>&copy; 2019. 企明星考核系统.</span>
-                    </div>
 
-                </div><!--footer-->
 
-            </div><!--maincontentinner-->
         </div><!--maincontent-->
 
 
-    </div><!--rightpanel-->
-
-</div><!--mainwrapper-->
 
 </body>
 <script type="text/javascript">

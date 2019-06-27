@@ -13,7 +13,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>企明星考核系统</title>
-
+    <link rel="stylesheet" href="<%=path %>/css/bootstrap/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/style.default.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-fileupload.min.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap-timepicker.min.css" type="text/css"/>
@@ -39,35 +39,11 @@
 <title>老师登陆成功</title>
 <body>
 
-<div class="mainwrapper">
-
-  <c:include value="../header.jsp"/>
-
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li><a href="">分类管理</a> <span class="separator"></span></li>
-            <li>分类管理</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
 
         <div class="maincontent" style="">
-            <div class="maincontentinner">
 
-                <div class="widget">
+
+                <div class="widget form-inline">
                     <h4 class="widgettitle">二级分类</h4>
                     <select class="form-control" name="centrePid.bigId" id="selectone" style="width:110px">
 
@@ -94,7 +70,8 @@
 
                         })
                     </script>
-                    <table id="dyntable" class="table table-bordered responsive">
+                    <div class="table-responsive">
+                    <table id="dyntable" class="table  table-hover table-bordered text-nowrap">
                         <colgroup>
                             <col class="con0" style="align: center; width: 15%"/>
 
@@ -105,12 +82,12 @@
                         </colgroup>
                         <thead>
                         <tr>
-                            <th class="head0">二级分类编号</th>
-                            <th class="head0">二级分类名称</th>
-                            <th class="head1">二级分类简写</th>
-                            <th class="head1">所属分类</th>
+                            <th >二级分类编号</th>
+                            <th >二级分类名称</th>
+                            <th >二级分类简写</th>
+                            <th >所属分类</th>
                             <input type="hidden" id="type" value="${ type}">
-                            <th class="head1">操作</th>
+                            <th >操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -131,6 +108,7 @@
 
                         </tbody>
                     </table>
+                    </div><!--maincontentinner-->
                 </div><!--widget-->
 
                 <br/><br/>
@@ -142,12 +120,9 @@
 
                 </div><!--footer-->
 
-            </div><!--maincontentinner-->
+
         </div><!--maincontent-->
 
-    </div><!--rightpanel-->
-
-</div><!--mainwrapper-->
 <script>
     function deleteJobDetail(id) {
         if (window.confirm("你确定要删除吗")) {

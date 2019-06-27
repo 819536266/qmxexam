@@ -38,32 +38,6 @@
 <title>老师登陆成功</title>
 <body>
 
-<div class="mainwrapper">
-
-    <div class="mainwrapper">
-        <c:include value="header.jsp"/>
-
-        <div class="rightpanel">
-
-            <ul class="breadcrumbs">
-                <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span
-                        class="separator"></span></li>
-                <li>试题管理<span class="separator"></span></li>
-                <li>添加试题</li>
-
-                <li class="right">
-                    <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                    <ul class="dropdown-menu pull-right skin-color">
-                        <li><a href="default">Default</a></li>
-                        <li><a href="navyblue">Navy Blue</a></li>
-                        <li><a href="palegreen">Pale Green</a></li>
-                        <li><a href="red">Red</a></li>
-                        <li><a href="green">Green</a></li>
-                        <li><a href="brown">Brown</a></li>
-                    </ul>
-                </li>
-            </ul>
-
 
             <div class="maincontent">
                 <div class="maincontentinner">
@@ -71,13 +45,15 @@
                     <div class="widget" id="parent">
                         <h4 class="widgettitle">添加试题</h4>
                         <div class="widgetcontent">
-                            <div style="width: 400px;margin-left: 220px">
-                            <a href="<%=path %>/teacher/subjectAddpd.jsp"><button class="btn" style="background-color: rgb(30, 130, 232); " >添加判断题</button></a>
-                                <a href="<%=path %>/teacher/subjectWord.jsp">
-                                    <button class="btn" style="background-color: rgb(30, 130, 232); ">Word文档录入</button>
-                                </a>
-                            </div>
+
+
                             <form class="stdform" action="subjectAdd.action" id="parent" method="post">
+                                <p class="stdformbutton">
+                                <a href="<%=path %>/teacher/subjectAddpd.jsp"><button class="btn" type="button" style="background-color: rgb(30, 130, 232); " >添加判断题</button></a>
+                                <a href="<%=path %>/teacher/subjectWord.jsp">
+                                    <button type="button" class="btn" style="background-color: rgb(30, 130, 232); ">Word文档录入</button>
+                                </a>
+                                </p>
                                 <label>选择部门:&nbsp;&nbsp;</label>
                                 <span class="field" id="span">
                                     <select class="form-control"  id="selectone" onchange="fun1()" style="width:110px"></select>
@@ -141,25 +117,11 @@
                     </div>
                     <!--widget-->
 
-                    <div class="footer" >
-                        <div class="footer-left">
-                            <span>&copy; 2013.  All Rights Reserved.</span>
-                        </div>
-
-                    </div>
-                    <!--footer-->
 
                 </div>
                 <!--maincontentinner-->
             </div>
-            <!--maincontent-->
 
-        </div>
-        <!--rightpanel-->
-
-    </div>
-    <!--mainwrapper-->
-</div>
 </body>
 <script type="text/javascript">
 

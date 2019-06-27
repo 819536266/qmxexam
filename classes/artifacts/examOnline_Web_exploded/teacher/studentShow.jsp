@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     String path = request.getContextPath();
@@ -32,30 +33,6 @@
 </head>
 <body>
 
-<div class="mainwrapper">
-    <s:include value="header.jsp"/>
-
-
-    <div class="rightpanel">
-
-        <ul class="breadcrumbs">
-            <li><a href="<%=path %>/teacher/teacher.jsp"><i class="iconfa-home"></i></a> <span class="separator"></span>
-            </li>
-            <li>员工管理 <span class="separator"></span></li>
-            <li>修改员工</li>
-
-            <li class="right">
-                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-                <ul class="dropdown-menu pull-right skin-color">
-                    <li><a href="default">Default</a></li>
-                    <li><a href="navyblue">Navy Blue</a></li>
-                    <li><a href="palegreen">Pale Green</a></li>
-                    <li><a href="red">Red</a></li>
-                    <li><a href="green">Green</a></li>
-                    <li><a href="brown">Brown</a></li>
-                </ul>
-            </li>
-        </ul>
 
 
         <div class="maincontent" style="">
@@ -78,21 +55,24 @@
                                 <font size="4" face="楷体">员工部门:
                                     <span class="field">${students.sclass} </span></font>
                             </p>
-                            <p>
+                            <%--<p>
                                 <font size="4" face="楷体">日期:
                                     <span class="field"> ${students.term}</span></font>
-                            </p>
+                            </p>--%>
                             </p>
 
                             <font size="4" face="楷体">分数:</font><br>
                             <c:if test="${students.sr.size()>0}">
                                 <c:forEach items="${students.sr}" var="scorde">
-                                    <font size="3" face="楷体">提交时间:
-                                        <span class="field"> ${scorde.testtime}</span></font>
+                                    <font size="3" face="楷体">提交时间:<fmt:formatDate value="${scorde.testtime}" var="testtime" pattern="yyyy年MM月dd日"></fmt:formatDate>
+                                        <span class="field"> ${testtime}</span></font>
                                     &nbsp;&nbsp;&nbsp;
                                     <font size="3" face="楷体">分数:
                                         <span class="score"> ${scorde.timescore}</span>分</font>
-                                    <a class="btn btn-primary btn-xs" onclick="deleteScorde(${scorde.scordeId})" href="#">删除</a>
+                                    <c:if test="${students.sr.size()>1}">
+                                        <a class="btn btn-primary btn-xs" onclick="deleteScorde(${scorde.scordeId})" href="#">删除</a>
+                                    </c:if>
+
                                     <br>
                                     <br>
                                 </c:forEach>
@@ -124,10 +104,6 @@
 
             </div><!--maincontentinner-->
         </div><!--maincontent-->
-
-    </div><!--rightpanel-->
-
-</div><!--mainwrapper-->
 
 </body>
 <script type="text/javascript">
