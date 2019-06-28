@@ -63,7 +63,6 @@
                     <a href="<%=path %>/getRandomSubject.action">
                         <i class="fa fa fa-bar-chart-o"></i>
                         <span class="nav-label">考试</span>
-                        <span class="fa arrow"></span>
                     </a>
                     <%--<ul class="nav nav-second-level">
                         <li>
@@ -125,11 +124,15 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+                           <h2 style="margin-right: 10px" class="text-danger ">${studentInfo!=null? studentInfo.studentName:"<a class='btn btn-success' onclick='login()'>请登录</a>"}
+                            <script>
+                                function login() {
+                                    window.location.href="<%=path %>"
+                                }
+                            </script>
+                           </h2>
                         </div>
-                    </form>
                 </div>
               <%--  <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">

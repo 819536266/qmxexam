@@ -59,7 +59,7 @@
             <h4>  <span><font size="3" face="楷体" color="rgb(30, 130, 232);">考核时间:</font>
                 <fmt:formatDate value="${scorde.testtime}" pattern="yyyy年MM月" var="date"></fmt:formatDate>${date}</span>
         &nbsp; &nbsp; &nbsp;
-                被考核人: ${studentname} &nbsp; &nbsp; &nbsp;<a href="javascript:void(0)" class="btn btn-success" onclick="fun()" >点击修改考核</a></h4>
+                被考核人: ${studentname} </h4>
         <div class="maincontent">
 
 
@@ -71,13 +71,9 @@
                         <tr  >
                             <td  rowspan="2" style="text-align:center;vertical-align:middle; "><h4>考核指标</h4></td>
                             <td  rowspan="2" style="text-align:center;vertical-align:middle;"><h3>考核内容</h3></td>
-                            <td  colspan="6" width="50px" style="text-align:center;vertical-align:middle;"><h3>分值</h3></td>
                             <td  rowspan="2" style="text-align:center;vertical-align:middle;"><h3>分数</h3></td>
                         </tr>
-                        <tr >
-                            <td >5</td>
 
-                        </tr>
 
                     </thead>
                     <tbody>
@@ -99,15 +95,15 @@
                         </c:forEach>
                     </s:iterator>
                   <tr style="text-align:center;vertical-align:middle; ">
-                        <td colspan="2" style="text-align:center;vertical-align:middle;">部门领导评分</td>
-                        <td colspan="3" style="text-align:center;vertical-align:middle;">分值</td>
-                        <td colspan="4" style="text-align:center;vertical-align:middle;"><input type="text" value="${scorde.shorttime}" readonly="readonly" style="width: 20px" />分</td>
+                        <td  style="text-align:center;vertical-align:middle;">部门领导评分</td>
+                        <td  style="text-align:center;vertical-align:middle;">分值</td>
+                        <td  style="text-align:center;vertical-align:middle;"><input type="text" value="${scorde.shorttime}" readonly="readonly" style="width: 20px" />分</td>
                     </tr>
 
                     <tr >
-                        <td colspan="2" style="text-align:center;vertical-align:middle;">总经理评分</td>
-                        <td colspan="3" style="text-align:center;vertical-align:middle;">分值</td>
-                        <td colspan="4" style="text-align:center;vertical-align:middle;"><input type="text" value="${scorde.timescore}"  readonly="readonly" name="scorde1.timescore"  style="width: 20px"  id="count"/>分</td>
+                        <td  style="text-align:center;vertical-align:middle;">总经理评分</td>
+                        <td style="text-align:center;vertical-align:middle;">分值</td>
+                        <td  style="text-align:center;vertical-align:middle;"><input type="text" value="${scorde.timescore}"  readonly="readonly" name="scorde1.timescore"  style="width: 20px"  id="count"/>分</td>
                     </tr>
 
                     </tbody>

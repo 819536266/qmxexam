@@ -135,8 +135,10 @@ public class ScordeDaoImpl extends BaseDaoImpl implements ScordeDao{
 	public List<Scorde> getByCriteria(DetachedCriteria detachedCriteria, BootstrapTable table) {
 		Session session = HibernateSessionFactory.getSession();
 		Criteria executableCriteria = detachedCriteria.getExecutableCriteria(session);
-		executableCriteria.setMaxResults(table.getLimit());
-		executableCriteria.setFirstResult(table.getOffset());
+		if(table.getLimit()!=null&&table.getOffset()!=null){
+			executableCriteria.setMaxResults(table.getLimit());
+			executableCriteria.setFirstResult(table.getOffset());
+		}
 		List<Scorde> list = executableCriteria.list();
 		session.close();
 		return list;

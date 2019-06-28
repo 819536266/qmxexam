@@ -49,7 +49,9 @@
 <body class="loginpage " style="width: 90%;height: 100%;background: #0a6bce">
 <div class="row" style="margin-top:150px ">
     <div class="col-md-3 col-md-offset-5 col-xs-8 col-xs-offset-3">
-        <div class="col-md-11 col-md-offset-1 col-xs-11 col-xs-offset-1"> <h2 style="margin-top: 10px;" ><font color="#f0f8ff" face="楷体">企明星考核系统</font></h2></div>
+        <div class="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+            <h2 style="margin-top: 10px;" ><font color="#f0f8ff" face="楷体">企明星考核</font></h2>
+        </div>
         <br>
         <form id="login" action="login.action" method="post" class="form-horizontal">
             <div class="col-md-12 col-xs-12">

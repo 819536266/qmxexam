@@ -19,6 +19,8 @@
     <script src="<%=path %>/js/jquery-1.9.1.min.js"></script>
     <script src="<%=path %>/js/jquery-ui-1.9.2.min.js"></script>
     <script src="<%=path %>/js/bootstrap.min.js"></script>
+    <link href="<%=path %>/admin/css/font-awesome.css" rel="stylesheet">
+    <link href="<%=path %>/admin/css/style.css?v=4.1.0" rel="stylesheet">
     <link rel="stylesheet" href="<%=path %>/css/student.css" type="text/css"/>
     <link rel="stylesheet" href="<%=path %>/css/bootstrap/bootstrap.min.css" type="text/css"/>
     <style>
@@ -124,6 +126,7 @@
     <title>学生登陆成功</title>
 </head>
 <body>
+<div class="gohome"><a class="animated bounceInUp" href="index.html?v=4.0" title="返回首页"><i class="fa fa-home"></i></a></div>
 <nav class="navbar navbar-default navbar-fixed-bottom" id="id">
     <div class="navbar-header" style="width: 100%;">
         <div class="row">
@@ -500,7 +503,7 @@
         </div>
     </div>
 
-
+    <script src="<%=path %>/admin/js/content.js?v=1.0.0"></script>
 </div>
 </body>
 </html>

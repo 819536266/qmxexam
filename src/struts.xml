@@ -232,6 +232,7 @@
             <result name="updateerror">/teacher/studentUpdateserror.jsp</result>
             <result name="queryByUserIdsuccess">teacher/Assess/AssessScordeadd.jsp</result>
             <result name="queryByUserIdAndScordeIdsuccess">teacher/Assess/AssessScordeUpload.jsp</result>
+            <result name="queryByUserIdAndScordeIdsuccess2">/student/assessShow.jsp</result>
         </action>
         <!-- 考核题-->
         <action name="assess_*" class="com.action.AssessAction" method="{1}">
