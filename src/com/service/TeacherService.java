@@ -10,4 +10,8 @@ public interface TeacherService {
     public Teacher getTeacherInfo(String teacherID);
 
     public void saveTeacher(Teacher teacher);
+
+    Teacher getTeacherInfo(Teacher teacher);
+
+    void update(Teacher teacherInfo);
 }

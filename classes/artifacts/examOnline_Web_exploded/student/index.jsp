@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>城建考试系统</title>
+    <title>企明星员工考试系统</title>
     <script src="<%=path %>/js/jquery-1.9.1.min.js"></script>
     <script src="<%=path %>/js/jquery-ui-1.9.2.min.js"></script>
     <script src="<%=path %>/js/bootstrap.min.js"></script>
@@ -123,7 +123,7 @@
             $("#from").submit();
         }
     </script>
-    <title>学生登陆成功</title>
+    <title>员工登陆成功</title>
 </head>
 <body>
 <div class="gohome"><a class="animated bounceInUp" href="index.html?v=4.0" title="返回首页"><i class="fa fa-home"></i></a></div>
@@ -260,7 +260,7 @@
             </div>
 
             <div class="examed_uc maincontentinner">
-                <h3 style="text-align: center;">洛阳城建学校考试</h3>
+                <h3 style="text-align: center;">企明星员工考试</h3>
                 <br>
                 <div class="exam_time">
                     <span>剩余时间为：</span><label name="mss" id="mss1"></label>

@@ -70,7 +70,7 @@ public class StudentUpdateAction extends ActionSupport {
         HttpServletRequest request = ServletActionContext.getRequest();
         Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
         if (student == null) {
-            addActionError("老师未登录");
+            addActionError("管理员未登录");
             return "teaerror";
         }
         try {

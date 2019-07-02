@@ -38,4 +38,14 @@ public class TeacherServiceImpl implements TeacherService {
         teacherDao.save(teacher);
 
     }
+
+    @Override
+    public Teacher getTeacherInfo(Teacher teacher) {
+        return (Teacher) teacherDao.find(teacher,teacher.getSysid());
+    }
+
+    @Override
+    public void update(Teacher teacherInfo) {
+        teacherDao.update(teacherInfo);
+    }
 }

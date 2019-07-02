@@ -85,7 +85,7 @@ public class ExportExcel extends ActionSupport {
         HttpServletResponse response = ServletActionContext.getResponse();
         Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
         if (student == null) {
-            addActionError("老师未登录");
+            addActionError("管理员未登录");
             return "teaerror";
         }
         //状态

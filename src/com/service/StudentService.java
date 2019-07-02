@@ -59,4 +59,6 @@ public interface StudentService {
 
     //导出员工
     public List<Scorde> exportExcel(Condition condition);
+
+    void updateStudent(Student studentInfo);
 }

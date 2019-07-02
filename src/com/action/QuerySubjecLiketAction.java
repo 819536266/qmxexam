@@ -78,7 +78,7 @@ public class QuerySubjecLiketAction extends ActionSupport {
             DetachedCriteria forClass = DetachedCriteria.forClass(Subject.class);
             Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
             if (student == null) {
-                addActionError("老师未登录");
+                addActionError("管理员未登录");
                 return "teaerror";
             }
             if (subjectTitle != null && !"".equals(subjectTitle)) {

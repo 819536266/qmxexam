@@ -16,7 +16,7 @@
     <title></title>
     <link rel="stylesheet" href="<%=path %>/css/student.css" type="text/css"/>
     <link rel="shortcut icon" href="<%=path %>/images/favicon.ico"/>
-    <title>学生登陆成功</title>
+    <title>员工登陆成功</title>
     <script src="<%=path %>/js/jquery-1.9.1.min.js"></script>
     <script src="<%=path %>/js/jquery-ui-1.9.2.min.js"></script>
     <script src="<%=path %>/js/bootstrap.min.js"></script>
@@ -137,7 +137,7 @@
         </div>
 
         <div class="examed_uc maincontentinner">
-            <h3 style="text-align: center;">洛阳城建学校考试参考答案</h3>
+            <h3 style="text-align: center;">企明星员工考试参考答案</h3>
             <br>
             <div>
                 <font size="3"> <span>考试时间：2 小时</span> &nbsp; &nbsp; &nbsp; &nbsp; </font>

@@ -26,6 +26,7 @@
     <link href="<%=path %>/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="<%=path %>/admin/css/animate.css" rel="stylesheet">
     <link href="<%=path %>/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="<%=path %>/js/vue/vue.min.js"></script>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -115,7 +116,14 @@
                     </ul>
                 </li>
                 <li class="line dk"></li>
-
+                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                    <span class="ng-scope">分类</span>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="modal" data-target="#modal"><i class="fa fa-envelope"></i>
+                        <span class="nav-label">修改密码 </span><span class="fa arrow"></span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -215,8 +223,90 @@
         </div>
     </div>
     <!--右侧部分结束-->
+    <div id="app">
+        <div id="modal" class="modal fade bs-example-model-lg"   tabindex="-1" role="dialog" aria-labelledby="">
+            <div class="modal-dialog modal-sm" role="document"  >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"  data-dismiss="modal" >
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                            <span class="sr-only">
+                            关闭
+                        </span>
+                        </button>
+                        <h4 class="modal-title">修改密码<span><font color="red" >{{font}}</font></span></h4>
+                    </div>
+                    <div class="modal-content" >
+                        <div class="ibox ">
+                            <div class="ibox-content" >
+                                <form  id="form">
+                                    <div class="form-group">
+                                        <label  for="name" >用户名:</label>
+                                        <input id="name" class="form-control" type="text" v-model="name" readonly="readonly">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password1"> 原始密码:</label>
+                                        <input id="password1" class="form-control" name="password1" v-model="password1"  type="password"  >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password2"> 修改密码:</label>
+                                        <input id="password2" class="form-control" name="password" v-model="password2" type="password"  >
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" v-on:click="subimt" >保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            name: '${teacherInfo.teacherID}',
+            password1: '',
+            password2: '',
+            font: '',
+        },
+        methods: {
+            subimt: function() {
+                if(this.name==''){
+                    this.font='检查是否登录!';
+                }else if(this.password1==''){
+                    this.font='原始密码为空!';
+                }else if(this.password2===''||this.password2.length<6){
+                    this.font='修改密码大于或等于6位!';
+                }else{
+                    $.ajax({
+                        type: 'post',
+                        url: 'update_teacherUpdate.action',
+                        data:{
+                            'teacher.sysid':${teacherInfo.sysid},
+                            'teacher.teacherID':this.name,
+                            'teacher.password':this.password1,
+                            'teacherpd':this.password2
+                        },
+                        success:function (data) {
+                            if(data=='success'){
+                                alert('修改成功,下次登录生效')
+                            }else{
+                                alert('修改失败')
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    })
+</script>
 <!-- 全局js -->
 <script src="<%=path %>/admin/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=path %>/admin/js/bootstrap.min.js?v=3.3.6"></script>

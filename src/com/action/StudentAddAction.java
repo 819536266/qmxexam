@@ -77,7 +77,7 @@ public class StudentAddAction extends ActionSupport {
         HttpServletRequest request = ServletActionContext.getRequest();
         Teacher teacher = (Teacher) request.getSession().getAttribute("teacherInfo");
         if (teacher == null) {
-            addActionError("老师未登录");
+            addActionError("管理员未登录");
             return "teaerror";
         }
         Student student = new Student();

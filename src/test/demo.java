@@ -1,7 +1,9 @@
 package test;
 
+import cn.hutool.core.util.StrUtil;
 import com.entity.Bigtype;
 import com.entity.Centre;
+import com.entity.Student;
 import com.util.HibernateSessionFactory;
 import com.util.MD5;
 import org.hibernate.SessionFactory;
@@ -10,34 +12,25 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 import org.json.JSONArray;
 import org.junit.Test;
+import test.util.Util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class demo {
     @Test
     public void text(){
+        List list=new ArrayList();
+       list.add(123);
+       // list=null;
 
-            char[] a = "c4e8c01fa835df8e".toCharArray();
-            for (int i = 0; i < a.length; i++){
-                a[i] = (char) (a[i] ^ 't');
-            }
-            String s = new String(a);
-
-        System.out.println(s);
-       /* SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yymm");
-        Date parse = null;
-        try {
-            parse = simpleDateFormat
-                    .parse("1905");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        simpleDateFormat.applyPattern("yyyy-mm");
-        System.out.println(simpleDateFormat.format(parse));*/
+        String s="";
+        s=null;
+        s="asd";
+        Student student = new Student();
+        System.out.println(StrUtil.isEmptyIfStr(s));
     }
+
+
 }

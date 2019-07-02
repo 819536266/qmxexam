@@ -212,7 +212,11 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return studentDao.exportExcel(condition);
 	}
-	
 
-	
+	@Override
+	public void updateStudent(Student studentInfo) {
+		studentDao.updateStudent(studentInfo);
+	}
+
+
 }

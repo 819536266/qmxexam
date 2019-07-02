@@ -43,15 +43,15 @@ public class GetRandomSubjects extends ActionSupport {
 
         request.setAttribute("subjectsjud", subjectsjud);
         request.setAttribute("subjects", subjects);
-        boolean isMoblie = JudgeIsMoblie(request);
+        /*boolean isMoblie = JudgeIsMoblie(request);
         if (isMoblie) {
             return "studentphone";
-        }
+        }*/
         //确定当前页面是答题状态
         return this.SUCCESS;
     }
 
-    public boolean JudgeIsMoblie(HttpServletRequest request) {
+   /* public boolean JudgeIsMoblie(HttpServletRequest request) {
         boolean isMoblie = false;
         String[] mobileAgents = {"iphone", "android", "phone", "mobile",
                 "wap", "netfront", "java", "opera mobi", "opera mini", "ucweb",
@@ -73,7 +73,7 @@ public class GetRandomSubjects extends ActionSupport {
                 "newt", "noki", "oper", "palm", "pana", "pant", "phil", "play",
                 "port", "prox", "qwap", "sage", "sams", "sany", "sch-", "sec-",
                 "send", "seri", "sgh-", "shar", "sie-", "siem", "smal", "smar",
-                "sony", "sph-", "symb", "t-mo", "teli", "tim-", /*"tosh",*/ "tsm-",
+                "sony", "sph-", "symb", "t-mo", "teli", "tim-", *//*"tosh",*//* "tsm-",
                 "upg1", "upsi", "vk-v", "voda", "wap-", "wapa", "wapi", "wapp",
                 "wapr", "webc", "winw", "winw", "xda", "xda-",
                 "Googlebot-Mobile"};
@@ -87,5 +87,5 @@ public class GetRandomSubjects extends ActionSupport {
             }
         }
         return isMoblie;
-    }
+    }*/
 }

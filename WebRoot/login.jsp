@@ -64,7 +64,7 @@
 			<div class="form-group form-group-md">
 				<label for="password" class="col-md-3 control-label col-xs-12" style="padding-left: 0;padding-right: 0"><font size="4" color="#fffff" face="楷体">密码:</font></label>
 				<div class="col-md-9 col-xs-12" style="padding-left: 0">
-					<input type="text" name="password" id="password" class="form-control input-lg"/>
+					<input type="password" name="password" id="password" class="form-control input-lg"/>
 				</div>
 			</div>
 			<br>

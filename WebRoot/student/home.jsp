@@ -26,6 +26,7 @@
     <link href="<%=path %>/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="<%=path %>/admin/css/animate.css" rel="stylesheet">
     <link href="<%=path %>/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="<%=path %>/js/vue/vue.min.js"  ></script>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -54,67 +55,24 @@
                     <span class="ng-scope">分类</span>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="<%=path %>/student/table_bootstrap.jsp">
+                    <a class="J_menuItem" href="<%=path %>/student/table_bootstrap.jsp" >
                         <i class="fa fa-home"></i>
                         <span class="nav-label">主页</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="<%=path %>/getRandomSubject.action">
+                    <a href="<%=path %>/getRandomSubject.action" >
                         <i class="fa fa fa-bar-chart-o"></i>
                         <span class="nav-label">考试</span>
                     </a>
-                    <%--<ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="<%=path %>/teacher/studentAdd.jsp">添加员工</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="<%=path %>/teacher/studentQuery.action">查询员工考试分数</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="<%=path %>/teacher/studentAssessQuery.action">查询员工考核分数</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="<%=path %>/target_query.action">查询考核指标</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="<%=path %>/teacher/studentJfree.jsp">显示部门柱状图</a>
-                        </li>
 
-                    </ul>--%>
                 </li>
-                <%--<li class="line dk"></li>
-                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                    <span class="ng-scope">分类</span>
+                <li class="">
+                    <a href="javascript:;" data-toggle="modal"  data-target="#modal">
+                        <i class="fa fa fa-bar-chart-o"></i>
+                        <span class="nav-label">修改密码</span>
+                    </a>
                 </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">分數查看</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="<%=path %>/student/table_bootstrap.jsp">考試分數查看</a>
-                        </li>
-                        <li><a class="J_menuItem" href="<%=path %>/student/table_foo_table.jsp">考核分數查看</a>
-                        </li>
-                        &lt;%&ndash;<li><a class="J_menuItem" href="<%=path %>/teacher/subjectQuery.jsp">搜索试题</a>
-                        </li>&ndash;%&gt;
-                    </ul>
-                </li>
-                <li class="line dk"></li>--%>
-               <%-- <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                    <span class="ng-scope">分类</span>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">试题管理 </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="<%=path %>/teacher/bigtype_query.action">一级分类</a>
-                        </li>
-                        <li><a class="J_menuItem" href="<%=path %>/teacher/centre_query.action">二级分类</a>
-                        </li>
-                        <li><a class="J_menuItem" href="<%=path %>/teacher/small_query.action">三级分类</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="line dk"></li>--%>
-
             </ul>
         </div>
     </nav>
@@ -134,93 +92,103 @@
                            </h2>
                         </div>
                 </div>
-              <%--  <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
-                        </a>
-                        &lt;%&ndash;  <ul class="dropdown-menu dropdown-messages">
-                              <li class="m-t-xs">
-                                  <div class="dropdown-messages-box">
-                                      <a href="profile.html" class="pull-left">
-                                          <img alt="image" class="img-circle" src="img/a7.jpg">
-                                      </a>
-                                      <div class="media-body">
-                                          <small class="pull-right">46小时前</small>
-                                          <strong>小四</strong> 是不是只有我死了,你们才不骂爵迹
-                                          <br>
-                                          <small class="text-muted">3天前 2014.11.8</small>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                  <div class="dropdown-messages-box">
-                                      <a href="profile.html" class="pull-left">
-                                          <img alt="image" class="img-circle" src="img/a4.jpg">
-                                      </a>
-                                      <div class="media-body ">
-                                          <small class="pull-right text-navy">25小时前</small>
-                                          <strong>二愣子</strong> 呵呵
-                                          <br>
-                                          <small class="text-muted">昨天</small>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                  <div class="text-center link-block">
-                                      <a class="J_menuItem" href="mailbox.html">
-                                          <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-                                      </a>
-                                  </div>
-                              </li>
-                          </ul>&ndash;%&gt;
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                &lt;%&ndash; <a href="mailbox.html">
-                                     <div>
-                                         <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
-                                         <span class="pull-right text-muted small">4分钟前</span>
-                                     </div>
-                                 </a>&ndash;%&gt;
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                &lt;%&ndash;<a href="profile.html">
-                                    <div>
-                                        <i class="fa fa-qq fa-fw"></i> 3条新回复
-                                        <span class="pull-right text-muted small">12分钟钱</span>
-                                    </div>
-                                </a>&ndash;%&gt;
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a class="J_menuItem" href="notifications.html">
-                                        <strong>查看所有 </strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>--%>
+
             </nav>
         </div>
+
         <div class="row J_mainContent" id="content-main">
-            <iframe id="J_iframe" width="100%" height="100%" src="<%=path %>/student/table_bootstrap.jsp" frameborder="0" data-id="index_v1.html" seamless="no"></iframe>
+            <iframe id="J_iframe"  width="100%" height="100%" src="<%=path %>/student/table_bootstrap.jsp" frameborder="0" data-id="index_v1.html" seamless="no"></iframe>
         </div>
+
     </div>
     <!--右侧部分结束-->
+    <!-- 模态框 -->
+    <div id="app">
+    <div id="modal" class="modal fade bs-example-model-lg"   tabindex="-1" role="dialog" aria-labelledby="">
+        <div class="modal-dialog modal-sm" role="document"  >
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"  data-dismiss="modal" >
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                            <span class="sr-only">
+                            关闭
+                        </span>
+                        </button>
+                        <h4 class="modal-title">修改密码<span><font color="red" >{{font}}</font></span></h4>
+                    </div>
+                    <div class="modal-content" >
+                        <div class="ibox ">
+                            <div class="ibox-content" >
+                                <form  id="form">
+                                    <input type="hidden" name="student.sysid" value="${studentInfo.sysid}">
+                                    <div class="form-group">
+                                        <label  for="name" >用户名:</label>
+                                        <input id="name" class="form-control" name="student.studentName" type="text" v-model="name" readonly="readonly">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password1"> 原始密码:</label>
+                                        <input id="password1" class="form-control" name="student.password" v-model="password1"  type="password"  >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password2"> 修改密码:</label>
+                                        <input id="password2" class="form-control" name="studentpd" v-model="password2" type="password"  >
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" v-on:click="subimt" >保存</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </div>
 
-index<!-- 全局js -->
+    new Vue({
+        el: '#app',
+        data: {
+            name: '${studentInfo.studentName}',
+            password1: '',
+            password2: '',
+            font: '',
+        },
+        methods: {
+            subimt: function() {
+                if(this.name==''){
+                    this.font='检查是否登录!';
+                }else if(this.password1==''){
+                    this.font='原始密码为空!';
+                }else if(this.password2===''||this.password2.length<6){
+                    this.font='修改密码大于或等于6位!';
+                }else{
+                    $.ajax({
+                        type: 'post',
+                        url: 'update_studentUpdate.action',
+                        data:{
+                            'student.sysid':${studentInfo.sysid},
+                            'student.studentName':this.name,
+                            'student.password':this.password1,
+                            'studentpd':this.password2
+                        },
+                        success:function (data) {
+                            if(data=='success'){
+                                alert('修改成功,下次登录生效')
+                            }else{
+                                alert('修改失败')
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    })
+</script>
+<!-- 全局js -->
 <script src="<%=path %>/admin/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=path %>/admin/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=path %>/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>

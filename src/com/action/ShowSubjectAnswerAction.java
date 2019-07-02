@@ -41,10 +41,10 @@ public class ShowSubjectAnswerAction extends ActionSupport {
             subjects.add(subject);
         }
         request.setAttribute("subjects", subjects);//把试题的信息封装成request发送给页面
-        boolean isMoblie = JudgeIsMoblie(request);
+       /* boolean isMoblie = JudgeIsMoblie(request);
         if (isMoblie) {
             return "studentco";
-        }
+        }*/
         //确定当前页面是答题状态
         return this.SUCCESS;
     }

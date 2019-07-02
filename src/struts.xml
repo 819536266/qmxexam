@@ -250,5 +250,8 @@
         <action name="scorde_*" class="com.action.ScordeAction" method="{1}">
 
         </action>
+        <action name="update_*" class="com.action.Updateaction" method="{1}">
+
+        </action>
     </package>
 </struts>
