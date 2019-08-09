@@ -2,6 +2,7 @@ package com.action;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.util.MD5;
 import org.apache.struts2.ServletActionContext;
 
 import com.entity.Student;
@@ -13,6 +14,10 @@ import com.service.StudentServiceImpl;
 import com.service.SubjectService;
 import com.service.SubjectServiceImpl;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class StudentUpdateAction extends ActionSupport {
     /**
      *
@@ -21,8 +26,44 @@ public class StudentUpdateAction extends ActionSupport {
     private String studentName;//员工名字
     private String sclass;//部门
     private String term;
+    private Date dateTerm;//入职日期
+    private Date correctiontime;//转正时间
+    private BigDecimal salary;//转正工资
+    private Date departuretime;
     private Integer sysid;
 
+    public Date getDeparturetime() {
+        return departuretime;
+    }
+
+    public void setDeparturetime(Date departuretime) {
+        this.departuretime = departuretime;
+    }
+
+    public Date getDateTerm() {
+        return dateTerm;
+    }
+
+    public void setDateTerm(Date dateTerm) {
+        this.dateTerm = dateTerm;
+    }
+
+
+    public Date getCorrectiontime() {
+        return correctiontime;
+    }
+
+    public void setCorrectiontime(Date correctiontime) {
+        this.correctiontime = correctiontime;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
 
     public Integer getSysid() {
         return sysid;
@@ -74,8 +115,19 @@ public class StudentUpdateAction extends ActionSupport {
             return "teaerror";
         }
         try {
-
-            ss.updateStudent(studentName, term, sclass, sysid);
+            Student studentInfo = ss.getStudentInfo(sysid);
+            if(studentInfo!=null){
+                SimpleDateFormat yYmm = new SimpleDateFormat("YYMM");
+                String term=yYmm.format(dateTerm);
+                studentInfo.setTerm(term);
+                studentInfo.setSalary(salary);
+                studentInfo.setCorrectiontime(correctiontime);
+                studentInfo.setDeparturetime(departuretime);
+                studentInfo.setDateTerm(dateTerm);
+                studentInfo.setSclass(sclass);
+                studentInfo.setStudentName(studentName);
+            }
+            ss.updateStudent(studentInfo);
         } catch (Exception e) {
             // TODO: handle exception
             return "error";

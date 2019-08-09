@@ -110,14 +110,11 @@
     function deleteScorde(scordeid){
         $.ajax({
             type:"post",
-            url:"${pageContext.request.contextPath}/deleteScorde.action?",
+            url:"${pageContext.request.contextPath}/scorde_deleteScorde.action",
             data:{"scorde.scordeId":scordeid},
             success:function (data) {
-                if(data!="error"){
-                    window.location.reload();
-                    return;
-                }
-                alert("删除失败")
+
+                alert(data)
             }
         })
     }

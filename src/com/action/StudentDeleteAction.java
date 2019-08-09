@@ -3,6 +3,7 @@ package com.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.entity.Student;
 import org.apache.struts2.ServletActionContext;
 
 import com.entity.Teacher;
@@ -46,17 +47,18 @@ public class StudentDeleteAction {
         HttpServletResponse response = ServletActionContext.getResponse();
         Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
         if (student == null) {
-            return "teaerror";
+            response.getWriter().write("error");
         }
         try{
-         studentService.deleteStudent(sysid);
+            Student studentInfo = studentService.getStudentInfo(sysid);
+            studentService.deleteStudent(studentInfo);
             response.getWriter().write("success");
         } catch (Exception e) {
             response.getWriter().write("error");
         }
         return null;
     }
-    public String deletecheck() throws IOException {
+  /*  public String deletecheck() throws IOException {
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
         Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
@@ -79,6 +81,6 @@ public class StudentDeleteAction {
         }
         return null;
     }
-
+*/
 
 }

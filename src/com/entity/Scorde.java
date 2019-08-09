@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +8,8 @@ import java.util.Set;
 /**
  * 成绩
  */
-public class Scorde {
+public class Scorde implements Serializable {
+    private static final long serialVersionUID = 4077628088832253194L;
     private int scordeId;//主键
 
     private Student stuSysid;//对应的员工

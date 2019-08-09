@@ -1,5 +1,7 @@
 package com.action;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +9,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.opensymphony.xwork2.ModelDriven;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.struts2.ServletActionContext;
 
 import com.entity.Scorde;
@@ -25,9 +29,43 @@ public class StudentAddAction extends ActionSupport {
     private String studentName;//姓名
     private String password;//密码
     private String sclass;//部门
-    private String term;//日期
+    private Date dateTerm;//入职日期
+    private BigDecimal internshipsalary;//入职工资
+    private Date correctiontime;//转正时间
+    private BigDecimal salary;//转正工资
     private String sclassone;
 
+    public Date getDateTerm() {
+        return dateTerm;
+    }
+
+    public void setDateTerm(Date dateTerm) {
+        this.dateTerm = dateTerm;
+    }
+
+    public BigDecimal getInternshipsalary() {
+        return internshipsalary;
+    }
+
+    public void setInternshipsalary(BigDecimal internshipsalary) {
+        this.internshipsalary = internshipsalary;
+    }
+
+    public Date getCorrectiontime() {
+        return correctiontime;
+    }
+
+    public void setCorrectiontime(Date correctiontime) {
+        this.correctiontime = correctiontime;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
 
     public String getSclassone() {
         return sclassone;
@@ -62,13 +100,6 @@ public class StudentAddAction extends ActionSupport {
         this.sclass = sclass;
     }
 
-    public String getTerm() {
-        return term;
-    }
-
-    public void setTerm(String term) {
-        this.term = term;
-    }
 
     private StudentService studentService = new StudentServiceImpl();
 
@@ -83,8 +114,10 @@ public class StudentAddAction extends ActionSupport {
         Student student = new Student();
         student.setPassword(MD5.Encrypt(password));//默认密码
         student.setSclass(sclass);//student class
-        Integer count = studentService.findBySclass(sclass, term);
+        SimpleDateFormat yYmm = new SimpleDateFormat("YYMM");
+        String term=yYmm.format(dateTerm);
         String ID = null;
+        Integer count = studentService.findBySclass(sclass, term);
         if (count == 0) {
             if (password.length() > 5) {
                 ID = sclassone + term + "1" + password.substring(password.length() - 4, password.length());
@@ -100,17 +133,25 @@ public class StudentAddAction extends ActionSupport {
                 ID = sclassone + term + count.toString();
             }
         }
+        student.setDateTerm(dateTerm);
+        student.setCorrectiontime(correctiontime);
+        student.setInternshipsalary(internshipsalary);
+        student.setSalary(salary);
         student.setStudentID(ID);//studentid
         student.setStudentName(studentName);//name
+
         student.setTerm(term);
+        student.setState(0);
         Scorde scorde = new Scorde(student,0,"0",0,new Date());
         Scorde scordeAssess = new Scorde(student,0,"1",1,new Date());
+        scorde.setShorttime(0);
+        scordeAssess.setShorttime(0);
         student.getSr().add(scorde);
         student.getSr().add(scordeAssess);
         try {
             List<Student> arrayList = new ArrayList<Student>();
-            Student studentPassword = studentService.getStudentPassword(student.getPassword());
-            if (studentPassword != null) {
+            List<Student> studentPassword = studentService.getStudentByName(student.getStudentName());
+            if (studentPassword.size() >0) {
                 arrayList.add(student);
                 request.setAttribute("excellist", arrayList);
                 return "error";
@@ -127,5 +168,6 @@ public class StudentAddAction extends ActionSupport {
         }
         return "error";
     }
+
 
 }

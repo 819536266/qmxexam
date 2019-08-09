@@ -1,13 +1,18 @@
 package com.dao;
 
+import com.entity.Centre;
 import com.entity.Target;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.util.HibernateSessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
 
-public class BaseDaoImpl implements BaseDao {
+import java.util.List;
+
+public class BaseDaoImpl<T> implements BaseDao {
 
     @Override
     public void delete(Object object) {
@@ -63,6 +68,15 @@ public class BaseDaoImpl implements BaseDao {
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public List<T> getByCriteria(DetachedCriteria detachedCriteria) {
+        Session session = HibernateSessionFactory.getSession();
+        Criteria executableCriteria =detachedCriteria.getExecutableCriteria(session);
+        List<T> list = executableCriteria.list();
+        HibernateSessionFactory.closeSession();
+        return list;
     }
 
 }

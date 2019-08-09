@@ -21,16 +21,16 @@ public class QuartzSchedulerListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 
 		JobDetail job = JobBuilder.newJob(SchedulerJob.class)
-			.withIdentity("anyJobName", "group1").build();
+				.withIdentity("anyJobName", "group").build();
 
 		try {
-
 			Trigger trigger = TriggerBuilder
 			  .newTrigger()
-			  .withIdentity("anyTriggerName", "group1")
+			  .withIdentity("anyTriggerName", "group")
 			  .withSchedule(
 			     CronScheduleBuilder.cronSchedule("0 0 0 1/1 * ? *"))
 			  .build();
+
 			Scheduler scheduler = new StdSchedulerFactory().getScheduler();
 			scheduler.start();
 			scheduler.scheduleJob(job, trigger);

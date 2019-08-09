@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.List;
 
+import com.util.BootstrapTable;
 import org.hibernate.criterion.DetachedCriteria;
 
 import com.entity.Scorde;
@@ -29,7 +30,7 @@ public interface StudentDao extends BaseDao {
     public List<Student> findStudentsByClass(String sclass, Page page);//查询部门员工 -分页查询
 
     //2019.3.6 牛牛修改
-    public void deleteStudent(Integer studentID);
+    public void deleteStudent(Student studentID);
 
     public void updateStudent(String studentName, String term, String sclass, Integer sysid);
 
@@ -53,4 +54,7 @@ public interface StudentDao extends BaseDao {
     //导出员工excel
     public List<Scorde> exportExcel(Condition condition);
 
+    int countStudentMar(DetachedCriteria condition);
+
+    List<Student> queryStudentByPageMar(DetachedCriteria forClass, BootstrapTable page);
 }

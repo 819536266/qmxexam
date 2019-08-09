@@ -88,10 +88,10 @@ public class LoginAction extends ActionSupport {
             if (teacherService.allowLogin(username, password)) {
                 Teacher teacherInfo = teacherService.getTeacherInfo(username);//获取老师的信息
                 Map session = ActionContext.getContext().getSession();
-                session.put("teacherInfo", teacherInfo);//将教师信息封装保存到session当中
+                session.put("teacherInfo", teacherInfo);//将管理员信息封装保存到session当中
                 return "teacherSuccess";
             } else {
-                addActionError("教师编号不存在或者密码输入不正确");
+                addActionError("管理员编号不存在或者密码输入不正确");
                 return "terchererror";
             }
         }

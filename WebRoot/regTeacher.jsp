@@ -51,9 +51,9 @@
             <div class="alert alert-error">Invalid username or password</div>
         </div>
 
-        <!--教师ID-->
+        <!--管理员ID-->
         <div class="inputwrapper animate2 bounceIn">
-            <label>教师ID：</label>
+            <label>管理员ID：</label>
             <div>
                 <input type="text" name="teacherID" placeholder="请输老师号">
             </div>

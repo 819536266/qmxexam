@@ -77,6 +77,7 @@ public class SmallAction extends ActionSupport implements ModelDriven<Small> {
     public  String queryByPid(){
         HttpServletResponse response = ServletActionContext.getResponse();
         List<Small> bigtypes =service.queryByPid(small==null?null:small.getSmallPid());
+        bigtypes.forEach(time->time.setSmallPid(null));
         JSONArray jsonArray = JSONArray.fromObject(bigtypes);
         try {
             response.setContentType("text/html;charset=UTF-8");

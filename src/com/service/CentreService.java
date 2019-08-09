@@ -2,6 +2,7 @@ package com.service;
 
 import com.entity.Bigtype;
 import com.entity.Centre;
+import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface CentreService {
     void update();
 
     List<Centre> queryByPid(Bigtype centrePid);
+
+    List<Centre> getByCriteria(DetachedCriteria detachedCriteria);
 }

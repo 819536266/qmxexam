@@ -21,6 +21,11 @@
             com.util.QuartzSchedulerListener
         </listener-class>
     </listener>
+    <listener>
+        <listener-class>
+            com.util.QuartzSchedulerListener1
+        </listener-class>
+    </listener>
  <!--   <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/error.jsp</location>

@@ -2,7 +2,7 @@ package com.entity;
 
 public class Teacher {
     private int sysid;//主键
-    private String teacherID;//教师的编号
+    private String teacherID;//管理员的编号
     private String password;//登录的密码
     private String sclass;//老师所带部门
     private String sclass1;

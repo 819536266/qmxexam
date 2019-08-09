@@ -124,12 +124,9 @@
                             %>
                             <td>
                                 <a  href="${pageContext.request.contextPath}/target_queryByUserId.action?Student.sysid=${student.stuSysid.sysid}">考核</a>&nbsp;&nbsp;&nbsp;
-                                <a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看所有</a>&nbsp;&nbsp;&nbsp;
+                                <a href="${pageContext.request.contextPath}/queryStudentByID?sysid=${student.stuSysid.sysid}&assess=1">查看所有</a>&nbsp;&nbsp;&nbsp;
                                 <a href="${pageContext.request.contextPath}/target_queryByUserIdAndScordeId.action?Student.sysid=${student.stuSysid.sysid}&scorde.scordeId=${student.scordeId}">查看本次</a>&nbsp;&nbsp;&nbsp;
-                                <%--<a href="studentupdate?sysid=${student.stuSysid.sysid}">修改</a>&nbsp;&nbsp;&nbsp;--%>
                                 <a id="deletestudent" onclick="deleteJobDetail(${student.stuSysid.sysid})">删除</a>&nbsp;&nbsp;&nbsp;
-                                <%--<a  href="Scordeadd.jsp?sysid=${student.stuSysid.sysid}&assess=1&studentName=${studentname}">添加考核</a>--%>
-
                             </td>
                         </tr>
                     </s:iterator>

@@ -27,7 +27,7 @@
                 <param name="actionName" >getRandomSubject</param>
                 <param name="namespace">/</param> &ndash;&gt;
             </result>-->
-            <!-- 教师登录成功的话 -->
+            <!-- 管理员登录成功的话 -->
             <result name="teacherSuccess">/teacher/teacher.jsp</result>
             <!-- 账号或者密码错误 -->
             <result name="studenterror">/login.jsp</result>
@@ -66,18 +66,6 @@
             <result name="studentco">/student/index_co.jsp</result>
             <result name="error">/login.jsp</result>
         </action>
-        <!-- 根据姓名查找员工 -->
-        <action name="queryStudentByName" class="com.action.QueryStudentByNameAction">
-            <result name="success">/teacher/studentManager.jsp</result>
-        </action>
-        <!-- 根据部门来查找员工 -->
-        <action name="queryStudentByClass" class="com.action.QueryStudentByClassAction">
-            <result name="success">/teacher/studentManagerByClass.jsp</result>
-        </action>
-        <!-- 根据主键查找员工 -->
-        <action name="queryStudentByID" class="com.action.QueryStudentByIDAction">
-            <result name="success">/teacher/studentShow.jsp</result>
-        </action>
         <!-- 添加员工 -->
         <action name="studentAdd" class="com.action.StudentAddAction">
             <result name="success">/teacher/studentaddSuccess.jsp</result>
@@ -111,6 +99,10 @@
         <!-- 更新题目前-显示题目的详情 -->
         <action name="subjectUpadateBefore" class="com.action.SubjectUpdateBefore">
             <result name="success">/teacher/subjectUpdate.jsp</result>
+        </action>
+        <!-- 根据主键查找员工 -->
+        <action name="queryStudentByID" class="com.action.QueryStudentByIDAction">
+            <result name="success">/teacher/studentShow.jsp</result>
         </action>
         <!-- 更新试题 -->
         <action name="subjectUpadate" class="com.action.SubjectUpdateAction">
@@ -201,8 +193,8 @@
         <action name="exportExcel" class="com.action.ExportExcel" method="exportExcel">
             <result name="success" type="redirectAction">studentQuery</result>
         </action>
-        <action name="QueryStudentsc" class="com.action.QueryStudent" method="query">
-            <result name="success">/teacher/studentinfo.jsp</result>
+        <action name="QueryStudentsc" class="com.action.QueryStudent" >
+            <result name="success">/teacher/student/queryStudent.jsp</result>
         </action>
         <!--一级分类-->
         <action name="bigtype_*" class="com.action.BigtypeAction" method="{1}">
@@ -244,13 +236,29 @@
             <result name="updateerror">/teacher/studentUpdateserror.jsp</result>
             <result name="addAssesssuccess">/teacher/studentaddSuccess.jsp</result>
             <result name="addAssesserror">/teacher/adderror.jsp</result>
-            <result name="updateAssesssuccess">/teacher/studentUpdatesSelect.jsp</result>
-            <result name="updateAssesserror">/teacher/studentUpdateserror.jsp</result>
+            <result name="updateAssesssuccess">/student/updateSuccess.jsp</result>
+            <result name="updateAssesserror">/student/updateError.jsp</result>
+            <result name="success">/teacher/score/assess.jsp</result>
+        </action>
+        <!--薪资计算-->
+        <action name="salary_*" class="com.action.SalaryAction" method="{1}" >
+            <result name="querybyuserid">/student/</result>
+            <result name="queryall">/teacher/</result>
+            <result name="querybymonth">/teacher/</result>
+            <result name="querybyid">/teacher/</result>
+            <result name="update">/teacher/</result>
+            <result name="add">/teacher/</result>
         </action>
         <action name="scorde_*" class="com.action.ScordeAction" method="{1}">
 
         </action>
         <action name="update_*" class="com.action.Updateaction" method="{1}">
+
+        </action>
+        <action name="student_*" class="com.action.StudentAction" method="{1}">
+
+        </action>
+        <action name="salary_*" class="com.action.SalaryAction" method="{1}">
 
         </action>
     </package>

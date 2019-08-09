@@ -117,9 +117,7 @@
                                     <td>${student.stuSysid.sclass}</td>
                                     <td>${student.stuSysid.studentName}</td>
                                     <td>${student.timescore} </td>
-                                    <td><a href="queryStudentByID?sysid=${student.stuSysid.sysid}&assess=0">查看</a>
-
-                                        <a href="studentupdate?sysid=${student.stuSysid.sysid}">修改</a>&nbsp;&nbsp;&nbsp;
+                                    <td><a href="${pageContext.request.contextPath}/queryStudentByID?sysid=${student.stuSysid.sysid}&assess=0">查看</a>
                                         <a id="deletestudent" onclick="deleteJobDetail(${student.stuSysid.sysid})">删除</a>
                                     </td>
                                 </tr>

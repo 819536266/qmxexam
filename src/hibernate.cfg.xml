@@ -22,7 +22,7 @@
         <property name="c3p0.idle_test_period">120</property>
 
         <!--Hibernate属性配置-->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <!-- <property name="connection.url">jdbc:mysql://47.92.175.80:3306/exam?characterEncoding=UTF-8</property> -->
         <property name="connection.url">jdbc:mysql://localhost:3306/qmxexam?characterEncoding=UTF-8</property>
         <property name="connection.username">root</property>
@@ -31,8 +31,11 @@
         <property name="myeclipse.connection.profile">mysql</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
         <!--映射文件-->
         <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping resource="com/entity/Salary.hbm.xml"/>
         <mapping resource="com/entity/Assess.hbm.xml"/>
         <mapping resource="com/entity/Target.hbm.xml"/>
         <mapping resource="com/entity/Small.hbm.xml"/>
@@ -42,6 +45,7 @@
         <mapping resource="com/entity/Student.hbm.xml"/>
         <mapping resource="com/entity/Subject.hbm.xml"/>
         <mapping resource="com/entity/Scorde.hbm.xml"/>
+
     </session-factory>
 
 </hibernate-configuration>

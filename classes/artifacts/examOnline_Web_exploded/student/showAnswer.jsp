@@ -113,7 +113,7 @@
 
             <div class="header">
             <div class="logo">
-                <a href="<%=path %>/getRandomSubject.action"><img src="<%=path %>/images/logo.png" alt=""/></a>
+                <a href="#"><h1>企明星考核</h1></a>
             </div>
             <div class="headerinner">
                 <ul class="headmenu">

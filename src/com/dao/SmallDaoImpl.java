@@ -40,8 +40,7 @@ public class SmallDaoImpl implements SmallDao {
             query.setParameter(0,centre);
         }
         List<Small> list = query.list();
-
-        session.close();
+        HibernateSessionFactory.closeSession();
         return list;
     }
 

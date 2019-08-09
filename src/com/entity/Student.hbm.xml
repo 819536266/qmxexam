@@ -10,16 +10,27 @@
             <generator class="native"></generator>
         </id>
         <!-- 学号  -->
-        <property name="studentID" column="studentID"></property>
+        <property name="studentID" ></property>
         <!-- 密码 -->
         <property name="password"></property>
+        <!-- 状态 -->
+        <property name="state"></property>
         <!-- 名字 -->
         <property name="studentName"></property>
-        <!-- 成绩 -->
+        <!-- 入职时间 -->
         <property name="term"></property>
+        <property name="dateTerm"></property>
+        <!--实习工资-->
+        <property name="internshipsalary" />
+        <!--转正时间-->
+        <property name="correctiontime" />
+        <!--转正工资-->
+        <property name="salary" />
+        <!--离职时间-->
+        <property name="departuretime"/>
         <!-- 部门 -->
         <property name="sclass"></property>
-        <set name="sr" cascade="save-update" inverse="true">
+        <set name="sr" cascade="all" inverse="true">
             <key column="stu_sysid"></key>
             <one-to-many class="com.entity.Scorde"/>
         </set>

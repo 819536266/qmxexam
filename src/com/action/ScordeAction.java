@@ -36,7 +36,17 @@ public class ScordeAction extends ActionSupport implements ModelDriven<Bootstrap
     }
     private Scorde scorde = new Scorde();
     private String  term;
+    private Integer studentid;
     private ScordeService service = new ScordeServiceImpl();
+
+    public int getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(int studentid) {
+        this.studentid = studentid;
+    }
+
     //根据用户信息获取分数
     public String getUserTable() throws IOException {
         HttpServletRequest request = ServletActionContext.getRequest();
@@ -46,6 +56,55 @@ public class ScordeAction extends ActionSupport implements ModelDriven<Bootstrap
             response.getWriter().write("error");
         }else{
             try {
+                //设置参数
+                DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Scorde.class);
+                detachedCriteria.add(Restrictions.eq("stuSysid",student));
+                detachedCriteria.add(Restrictions.eq("assess",table.getAssess()));
+                detachedCriteria.setProjection(Projections.rowCount());
+                //获取总条数
+                int count=service.getByCriteriaCount(detachedCriteria);
+                //取消获取条数,设置排序参数
+                DetachedCriteria detachedCriteria1 = DetachedCriteria.forClass(Scorde.class);
+                detachedCriteria1.add(Restrictions.eq("stuSysid",student));
+                detachedCriteria1.add(Restrictions.eq("assess",table.getAssess()));
+                if(table.getShor()!=null&&!table.getShor().equals("")){
+                    if(table.getOrder().equals("asc")){
+                        detachedCriteria1.addOrder(Order.asc(table.getShor()));
+                    }else{
+                        detachedCriteria1.addOrder(Order.desc(table.getShor()));
+                    }
+                }
+                List<Scorde> list=service.getByCriteria(detachedCriteria1,table);
+
+                //设置关联参数,避免转换错误
+                list.forEach(time->{time.setSet(null);time.setStuSysid(null);});
+                //放入map
+                Map<String, Object> map = new HashMap<>();
+                map.put("total",count);
+                map.put("rows",list);
+                JsonConfig jsonConfig = new JsonConfig();
+                jsonConfig.setExcludes(new String[] {"set","stuSysid"});
+                JSONObject jsonArray = JSONObject.fromObject(map);
+                System.out.println(jsonArray.toString());
+                response.getWriter().write(jsonArray.toString());
+            } catch (IOException e) {
+                response.getWriter().write("error");
+            }
+        }
+        return null;
+    }
+
+    //根据用户信息获取分数
+    public String getScoreByAssess() throws IOException {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        HttpServletResponse response = ServletActionContext.getResponse();
+
+        if(studentid==null||studentid==0){
+            response.getWriter().write("error");
+        }else{
+            try {
+                Student student = new Student();
+                student.setSysid(studentid);
                 //设置参数
                 DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Scorde.class);
                 detachedCriteria.add(Restrictions.eq("stuSysid",student));
@@ -99,7 +158,7 @@ public class ScordeAction extends ActionSupport implements ModelDriven<Bootstrap
     public void setTerm(String term) {
         this.term = term;
     }
-//添加考核分数
+    //添加考核分数
     public String add() throws ParseException {
         HttpServletRequest request = ServletActionContext.getRequest();
         Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
@@ -135,21 +194,87 @@ public class ScordeAction extends ActionSupport implements ModelDriven<Bootstrap
         return "success";
     }
     //删除分数
-    public String delete(){
+    public String addScore() throws ParseException, IOException {
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setCharacterEncoding("utf-8");
         Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
         if (student == null) {
-            addActionError("管理员未登录");
-            return "teaerror";
+            response.getWriter().write("管理员未登录");
+        }
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMM");
+            Date parse = simpleDateFormat .parse(term);
+            scorde.setTesttime(parse);
+            Student student1 = new Student();
+            student1.setSysid(studentid);
+            Scorde Scorde = service.findEndScorde(student1);
+            Scorde studentScorde = new Scorde();
+            scorde.setStuSysid(student1);
+            if (Scorde != null) {
+                //如果次数为0则修改最初次数
+                if (Scorde.getCount() == 0) {
+                    scorde.setCount(1);
+                    scorde.setAssess("1");
+                    scorde.setTimescore(0);
+                    scorde.setShorttime(0);
+                    service.saveScorde(scorde);
+                } else {
+                    scorde.setCount(Scorde.getCount() + 1);
+                    scorde.setAssess("1");
+                    scorde.setTimescore(0);
+                    scorde.setShorttime(0);
+                    service.saveScorde(scorde);//把成绩保存到数据库中
+                }
+            } else {
+                scorde.setCount(Scorde.getCount() + 1);
+                scorde.setAssess("1");
+                scorde.setTimescore(0);
+                scorde.setShorttime(0);
+                service.saveScorde(scorde);
+            }
+            response.getWriter().write("保存成功!");
+        } catch (Exception e) {
+            response.getWriter().write("保存失败!");
+        }
+        return null;
+    }
+    public String delete() throws IOException {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setCharacterEncoding("utf-8");
+        Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
+        if (student == null) {
+            response.getWriter().write("管理员未登录");
         }
         try {
             Scorde byid = service.getByid(scorde);
             service.deleteScorde(byid);
-            response.getWriter().write("success");
+            response.getWriter().write("删除成功");
         } catch (Exception e) {
             try {
-                response.getWriter().write("error");
+                response.getWriter().write("删除失败");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String queryOne() throws IOException {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setCharacterEncoding("utf-8");
+        Teacher student = (Teacher) request.getSession().getAttribute("teacherInfo");
+        if (student == null) {
+            response.getWriter().write("管理员未登录");
+        }
+        try {
+            Scorde byid = service.getByid(scorde);
+            response.getWriter().write("删除成功");
+        } catch (Exception e) {
+            try {
+                response.getWriter().write("删除失败");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

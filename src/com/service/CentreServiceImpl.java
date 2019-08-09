@@ -4,10 +4,11 @@ import com.dao.CentreDao;
 import com.dao.CentreDaoImpl;
 import com.entity.Bigtype;
 import com.entity.Centre;
+import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;
 
-public class CentreServiceImpl implements  CentreService{
+public class CentreServiceImpl  implements  CentreService {
     private CentreDao dao=new CentreDaoImpl();
     @Override
     public boolean add(Centre centre) {
@@ -32,5 +33,11 @@ public class CentreServiceImpl implements  CentreService{
     @Override
     public List<Centre> queryByPid(Bigtype centrePid) {
         return  dao.query(centrePid);
+    }
+
+    @Override
+    public List<Centre> getByCriteria(DetachedCriteria detachedCriteria) {
+        List<Centre> byCriteria = dao.getByCriteria(detachedCriteria);
+        return byCriteria;
     }
 }

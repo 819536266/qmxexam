@@ -1,8 +1,10 @@
 package com.util;
 
+import com.entity.Student;
+
 import java.util.List;
 
-public class PageResult {
+public class PageResult  {
     private Page page;//封装好的分页信息
     private List list;//记录信息
 

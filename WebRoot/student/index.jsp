@@ -126,7 +126,7 @@
     <title>员工登陆成功</title>
 </head>
 <body>
-<div class="gohome"><a class="animated bounceInUp" href="index.html?v=4.0" title="返回首页"><i class="fa fa-home"></i></a></div>
+<div class="gohome"><a class="animated bounceInUp" href="<%=path %>/student/home.html?v=4.0" title="返回首页"><i class="fa fa-home"></i></a></div>
 <nav class="navbar navbar-default navbar-fixed-bottom" id="id">
     <div class="navbar-header" style="width: 100%;">
         <div class="row">
@@ -237,7 +237,7 @@
 
             <div class="header">
                 <div class="logo">
-                    <a href="<%=path %>/getRandomSubject.action"><img src="<%=path %>/images/logo.png" alt=""/></a>
+                    <a href="#"><h1>企明星考核</h1></a>
                 </div>
                 <div class="headerinner">
                     <ul class="headmenu">

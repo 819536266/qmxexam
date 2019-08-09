@@ -1,6 +1,11 @@
 package com.dao;
 
-public interface BaseDao {
+import com.entity.Centre;
+import org.hibernate.criterion.DetachedCriteria;
+
+import java.util.List;
+
+public interface BaseDao<T> {
     //增
     public void save(Object object);
 
@@ -12,4 +17,6 @@ public interface BaseDao {
 
     //改
     public void update(Object object);
+
+    List<T> getByCriteria(DetachedCriteria detachedCriteria);
 }

@@ -95,9 +95,11 @@ public class SubmitExamAction extends ActionSupport {
                 Scorde.setTesttime(new Date());
                 Scorde.setCount(1);
                 Scorde.setTimescore(score);
-                studentScorde.setAssess("0");
+                Scorde.setShorttime(0);
+                Scorde.setAssess("0");
                 service.updateScorde(Scorde);
             } else {
+                studentScorde.setShorttime(0);
                 studentScorde.setStuSysid(student);
                 studentScorde.setTesttime(new Date());
                 studentScorde.setCount(Scorde.getCount() + 1);
@@ -106,6 +108,7 @@ public class SubmitExamAction extends ActionSupport {
                 service.saveScorde(studentScorde);//把成绩保存到数据库中
             }
         } else {
+            studentScorde.setShorttime(0);
             studentScorde.setStuSysid(student);
             studentScorde.setTesttime(new Date());
             studentScorde.setCount(Scorde.getCount() + 1);

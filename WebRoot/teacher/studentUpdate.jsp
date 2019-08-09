@@ -11,23 +11,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
-    <link rel="stylesheet" href="<%=path %>/css/style.default.css" type="text/css"/>
-    <link rel="stylesheet" href="<%=path %>/css/responsive-tables.css">
-    <link rel="stylesheet" href="<%=path %>/css/bootstrap-fileupload.min.css" type="text/css"/>
-    <link rel="stylesheet" href="<%=path %>/css/bootstrap-timepicker.min.css" type="text/css"/>
-    <link rel="shortcut icon" href="<%=path %>/images/favicon.ico"/>
-
-    <%-- <script type="text/javascript" src="<%=path %>/jquery/jquery-1.4.2.js"></script> --%>
-    <%-- 	<link rel="stylesheet" href="<%=path %>/jquery/jquery.datepick.css" type="text/css">
-        <script type="text/javascript" src="<%=path %>/jquery/jquery.datepick.js"></script>
-        <script type="text/javascript" src="<%=path %>/jquery/jquery.datepick-zh-CN.js"></script> --%>
+    <title>企明星考核系统</title>
+    <link href="<%=path %>/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <!-- orris -->
+    <link href="<%=path %>/admin/css/animate.css" rel="stylesheet">
+    <link href="<%=path %>/admin/css/font-awesome.css" rel="stylesheet">
+    <link href="<%=path %>/admin/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="<%=path %>/admin/css/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=path %>/admin/css/animate.css" rel="stylesheet">
+    <link href="<%=path %>/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=path %>/admin/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
     <link rel="stylesheet" href="<%=path %>/css/BeatPicker.min.css"/>
-    <script src="<%=path %>/js/jquery-2.1.4.min.js"></script>
-    <script src="<%=path %>/js/BeatPicker.min.js"></script>
-    <script src="<%=path %>/js/select.js"></script>
 
     <style type="text/css">
         select {
@@ -37,122 +32,90 @@
         }
     </style>
 
-    <%-- <script type="text/javascript">
-
-        jQuery(document).ready(function(){
-
-        $('#birthday').datepick({dateFormat: 'yy-mm-dd'});
-
-            // dynamic table
-            jQuery('#dyntable').dataTable({
-                "sPaginationType": "full_numbers",
-                "aaSortingFixed": [[0,'asc']],
-                "fnDrawCallback": function(oSettings) {
-                    jQuery.uniform.update();
-                }
-            });
-
-            jQuery('#dyntable2').dataTable( {
-                "bScrollInfinite": true,
-                "bScrollCollapse": true,
-                "sScrollY": "300px"
-            });
-        });
-         //ajax
-         function showStatus(str){
-             //如果form表单中的字符串为空的话，就把显示的返回值清空，并且返回函数，不再往下执行
-                if (str.length == 0) {
-                    document.getElementById("txt").innerHTML = "";
-                    return;
-                }
-                if (window.XMLHttpRequest) {
-                //chrome Firefox opera Safari……
-                    var xmlhttp = new XMLHttpRequest();
-                } else {
-                //兼容老版本
-                    var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                //如果可以连接的通
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                // 并且返回值是HTTP200
-                        document.getElementById("txt").innerHTML = xmlhttp.responseText;
-                // 获取ajax 从后台回传的数据
-                    }
-                }
-            //打开ajax
-                xmlhttp.open("GET", "checkStudentID.action?studentID=" + str, true);
-            //发送请求
-                xmlhttp.send();
-         }
-
-
-
-
-    </script> --%>
     <title>企明星考核系统</title>
 </head>
-<body>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>添加员工</h5>
+        </div>
+        <div class="ibox-content " >
+            <div class="row">
 
-        <div class="maincontent" style="">
-            <div class="maincontentinner">
-
-                <div class="widget">
-                    <h4 class="widgettitle">修改员工</h4>
-                    <div class="widgetcontent">
-
-                        <form class="stdform" action="update.action" method="post" id="login">
-
-                            <label>员工部门:&nbsp;&nbsp;</label>
-                            <span class="field" id="span">
-                                    <select class="form-control"  id="selectone" onchange="fun1()" style="width:110px"></select>
-                                    <select class="form-control"  name="scalss" id="selecttwo" onchange="fun2()" style="width:110px">
+                        <form class="form-horizontal col-xs-offset-1 col-md-offset-4"  action="update.action" method="post" id="login">
+                            <div class="form-group form-inline" >
+                                <label for="span" class="col-sm-2 control-label">员工部门:</label>
+                                <span  id="span" class="col-sm-10">
+                                    <select class="form-control"  id="selectone" onchange="fun1()" style="width:110px;height: 35px"></select>
+                                    <select class="form-control"  name="scalss" id="selecttwo" onchange="fun2()" style="width:110px;height: 35px">
                                     </select>
                                 </span>
-                            <label>日期:&nbsp;&nbsp;</label>
-                            <span class="field">
-							<div id="date">
-								<select id="year" style="width:110px">
-									<option value="">选择年份</option>
-								</select>
-								<select id="month" style="width:105px">
-									<option value="">选择月份</option>
-								</select>
-							</div>
-						</span>
-                            <input type="hidden" name="term" value="${stu.term }" id="semester">
+                            </div>
+
 
                             <input type="hidden" name="sysid" value="${stu.sysid}">
+                            <div class="form-group" >
+                                <label class="col-sm-2 control-label">员工姓名：</label>
+                                <input type="text" name="studentName" style="width:215px"
+                                       class="col-sm-10 form-control" placeholder="请输入..."
+                                       required="required" onkeyup="showStatus(this.value)"  value="${stu.studentName }"/><span
+                                    id="txt"></span>
+                            </div>
 
-                            <label>员工姓名：</label>
-                            <span class="field"><input type="text" name="studentName" style="width:215px"
-                                                       class="input-xlarge" value="${stu.studentName }"
-                                                       required="required"/></span>
-
-
-                            <p class="stdformbutton">
-                                <input class="btn btn-primary" type="submit" value="录入" style="width:100px">
-                                <a href="<%=path %>/teacher/studentQuery.action">
+                            <div class="form-group" id="data_1">
+                                <label class="col-sm-2 control-label">入职时间：</label>
+                                <div class="input-group date col-sm-10">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" id="date1" readonly="readonly" name="dateTerm" value="${stu.dateTerm }"  class="form-control" style="width:175px">
+                                </div>
+                            </div>
+                            <div class="form-group" id="data_2">
+                                <label class="col-sm-2 control-label">转正时间：</label>
+                                <div class="input-group date col-sm-10 ">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" id="date2" name="correctiontime" value="${stu.correctiontime }" readonly="readonly" class="form-control"style="width:175px">
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-sm-2 control-label">转正工资：</label>
+                                <input type="number" style="width:215px"
+                                       class="col-sm-10 form-control" name="salary" placeholder="请输入..."
+                                       required="required" value="${stu.salary }"/>
+                            </div>
+                            <div class="form-group" id="data_3">
+                                <label class="col-sm-2 control-label">离职时间：</label>
+                                <div class="input-group date col-sm-10 ">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" id="date3" name="departuretime" readonly="readonly" value="${stu.departuretime }" class="form-control"style="width:175px">
+                                </div>
+                            </div>
+                            <div class="form-group " >
+                                <input class="btn btn-primary col-sm-offset-2" type="submit" value="录入" style="width:100px">
+                                <a href="javascript:history.go(-1);">
                                     <button class="btn" type="button">取消</button>
                                 </a>
-                            </p>
+                            </div>
 
                         </form>
-                    </div><!--widgetcontent-->
-                </div><!--widget-->
-
-                <br/><br/>
-
-                <div class="footer" >
-                    <div class="footer-left">
-                        <span>&copy; 2019. 企明星考核系统.</span>
-                    </div>
-
-                </div><!--footer-->
-
-            </div><!--maincontentinner-->
-        </div><!--maincontent-->
-
+            </div>
+        </div>
+        <div class="ibox-footer" style="position: fixed;bottom:0px;">
+            <div class="footer-left">
+                <span>&copy; 2019. 企明星考核系统.</span>
+            </div>
+        </div><!--maincontentinner-->
+    </div><!--maincontent-->
+</div>
+<script src="<%=path %>/admin/js/jquery.min.js"></script>
+<script src="<%=path %>/js/bootstrap.min.js"></script>
+<!-- 自定义js -->
+<script src="<%=path %>/admin/js/content.js"></script>
+<script src="<%=path %>/js/select.js"></script>
+<!-- Data picker -->
+<script src="<%=path %>/admin/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<!-- Image cropper -->
+<script src="<%=path %>/admin/js/plugins/cropper/cropper.min.js"></script>
 <script type="text/javascript">
 
     $(function () {
@@ -235,140 +198,47 @@
         selecttwo = $("#selecttwo").val();
         $("#kind").val(selecttwo);
     });
-
-
-
-
     jQuery(document).ready(function () {
-        term = "${stu.term}";
-
-        if (term != null && term != "") {
-            $("#year").empty();
-            $("#year").append("<option value='20" + term.substring(0, 2) + "年'>" + "20" + term.substring(0, 2) + "年" + "</option>");
-            $("#month").empty();
-            $("#month").append("<option value='" + term.substring(2) + "月'>" + term.substring(2) + "月" + "</option>");
-        }
-
-        $("#date").selectDate();
-
-
-        // dropdown in leftmenu
-        jQuery('.leftmenu .dropdown > a').click(function () {
-            if (!jQuery(this).next().is(':visible'))
-                jQuery(this).next().slideDown('fast');
-            else
-                jQuery(this).next().slideUp('fast');
-            return false;
+        /*加载时间选择器*/
+        $('#data_1 .input-group.date').datepicker({
+            minViewMode: 0,
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            todayHighlight: true
         });
-
-        if (jQuery.uniform)
-            jQuery('input:checkbox, input:radio, .uniform-file').uniform();
-
-        if (jQuery('.widgettitle .close').length > 0) {
-            jQuery('.widgettitle .close').click(function () {
-                jQuery(this).parents('.widgetbox').fadeOut(function () {
-                    jQuery(this).remove();
-                });
-            });
-        }
-
-
-        // add menu bar for phones and tablet
-        jQuery('<div class="topbar"><a class="barmenu">' +
-            '</a></div>').insertBefore('.mainwrapper');
-
-        jQuery('.topbar .barmenu').click(function () {
-
-            var lwidth = '260px';
-            if (jQuery(window).width() < 340) {
-                lwidth = '240px';
-            }
-
-            if (!jQuery(this).hasClass('open')) {
-                jQuery('.rightpanel, .headerinner, .topbar').css({marginLeft: lwidth}, 'fast');
-                jQuery('.logo, .leftpanel').css({marginLeft: 0}, 'fast');
-                jQuery(this).addClass('open');
-            } else {
-                jQuery('.rightpanel, .headerinner, .topbar').css({marginLeft: 0}, 'fast');
-                jQuery('.logo, .leftpanel').css({marginLeft: '-' + lwidth}, 'fast');
-                jQuery(this).removeClass('open');
-            }
+        $('#data_2 .input-group.date').datepicker({
+            minViewMode: 0,
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            todayHighlight: true
         });
-
-        // show/hide left menu
-        jQuery(window).resize(function () {
-            if (!jQuery('.topbar').is(':visible')) {
-                jQuery('.rightpanel, .headerinner').css({marginLeft: '260px'});
-                jQuery('.logo, .leftpanel').css({marginLeft: 0});
-            } else {
-                jQuery('.rightpanel, .headerinner').css({marginLeft: 0});
-                jQuery('.logo, .leftpanel').css({marginLeft: '-260px'});
-            }
+        $('#data_3 .input-group.date').datepicker({
+            minViewMode: 0,
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            todayHighlight: true
         });
-
-        // dropdown menu for profile image
-        jQuery('.userloggedinfo img').click(function () {
-            if (jQuery(window).width() < 480) {
-                var dm = jQuery('.userloggedinfo .userinfo');
-                if (dm.is(':visible')) {
-                    dm.hide();
-                } else {
-                    dm.show();
-                }
-            }
-        });
-
-        // change skin color
-        jQuery('.skin-color a').click(function () {
-            return false;
-        });
-        jQuery('.skin-color a').hover(function () {
-            var s = jQuery(this).attr('href');
-            if (jQuery('#skinstyle').length > 0) {
-                if (s != 'default') {
-                    jQuery('#skinstyle').attr('href', 'css/style.' + s + '.css');
-                    jQuery.cookie('skin-color', s, {path: '/'});
-                } else {
-                    jQuery('#skinstyle').remove();
-                    jQuery.cookie("skin-color", '', {path: '/'});
-                }
-            } else {
-                if (s != 'default') {
-                    jQuery('head').append('<link id="skinstyle" rel="stylesheet" href="css/style.' + s + '.css" type="text/css" />');
-                    jQuery.cookie("skin-color", s, {path: '/'});
-                }
-            }
-            return false;
-        });
-
-        // load selected skin color from cookie
-
-
-        // expand/collapse boxes
-        if (jQuery('.minimize').length > 0) {
-
-            jQuery('.minimize').click(function () {
-                if (!jQuery(this).hasClass('collapsed')) {
-                    jQuery(this).addClass('collapsed');
-                    jQuery(this).html("&#43;");
-                    jQuery(this).parents('.widgetbox')
-                        .css({marginBottom: '20px'})
-                        .find('.widgetcontent')
-                        .hide();
-                } else {
-                    jQuery(this).removeClass('collapsed');
-                    jQuery(this).html("&#8211;");
-                    jQuery(this).parents('.widgetbox')
-                        .css({marginBottom: '0'})
-                        .find('.widgetcontent')
-                        .show();
-                }
-                return false;
-            });
-
-        }
 
     });
+
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "H+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
 </script>
 </body>
 </html>

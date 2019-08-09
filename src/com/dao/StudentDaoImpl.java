@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.util.BootstrapTable;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -21,12 +22,11 @@ import org.hibernate.criterion.Restrictions;
 
 import com.entity.Scorde;
 import com.entity.Student;
-import com.entity.Subject;
 import com.util.Condition;
 import com.util.HibernateSessionFactory;
 import com.util.Page;
 
-public class StudentDaoImpl extends BaseDaoImpl implements StudentDao {
+public class StudentDaoImpl extends BaseDaoImpl<Student> implements StudentDao {
 	@Override
 	public Student findBySysid(Integer sysid) {
 		Session session = HibernateSessionFactory.getSession();
@@ -348,26 +348,13 @@ public class StudentDaoImpl extends BaseDaoImpl implements StudentDao {
 	 * */
 	
 	@Override
-	public void deleteStudent(Integer sysid) {
-		Set<Scorde>  sr=new HashSet<Scorde>();
+	public void deleteStudent(Student sysid) {
 		Session session = HibernateSessionFactory.getSession();
-		Student object = (Student) session.get(Student.class,sysid);
-		sr= object.getSr();
-		if(sr.size()>0){
-			session.close();
-			Session session2 = HibernateSessionFactory.getSession();
-			Transaction beginTransaction2 = session2.beginTransaction();
-			for (Scorde scorde : sr) {
-				session2.delete(scorde);
-			}
-			beginTransaction2.commit();
-			session2.close();
-		}
-		Session session3 = HibernateSessionFactory.getSession();
-		Transaction beginTransaction3 = session3.beginTransaction();
-		session3.delete(object);
-		beginTransaction3.commit();
-		session3.close();
+		Transaction transaction = session.beginTransaction();
+	/*	sysid.getSr().forEach(time->session.delete(time));*/
+		session.delete(sysid);
+		transaction.commit();
+		HibernateSessionFactory.closeSession();
 	}
 	/*
 	 *按照员工ID修改信息
@@ -556,7 +543,29 @@ public class StudentDaoImpl extends BaseDaoImpl implements StudentDao {
 		HibernateSessionFactory.closeSession();
 		return arrayList;
 	}
-	
 
-	
+    @Override
+    public int countStudentMar(DetachedCriteria condition) {
+        Session session = HibernateSessionFactory.getSession();
+        Criteria executableCriteria = condition.getExecutableCriteria(session);
+        List<Student> list = executableCriteria.list();
+        if(list==null){
+            return 0;
+        }
+        return list.size();
+    }
+
+    @Override
+    public List<Student> queryStudentByPageMar(DetachedCriteria forClass, BootstrapTable table) {
+        Session session = HibernateSessionFactory.getSession();
+        Criteria executableCriteria = forClass.getExecutableCriteria(session);
+		if(table.getLimit()!=null&&table.getOffset()!=null){
+			executableCriteria.setMaxResults(table.getLimit());
+			executableCriteria.setFirstResult(table.getOffset());
+		}
+        List<Student> list = executableCriteria.list();
+        return list;
+    }
+
+
 }

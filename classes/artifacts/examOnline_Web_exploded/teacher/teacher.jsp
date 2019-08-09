@@ -71,24 +71,37 @@
                             <a class="J_menuItem" href="<%=path %>/teacher/studentAdd.jsp">添加员工</a>
                         </li>
                         <li>
+                            <a class="J_menuItem" href="<%=path %>/teacher/student/list.jsp">查看员工</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="line dk"></li>
+                <li>
+                    <a class="J_menuItem" href="<%=path %>/teacher/salary/salary.jsp">
+                        <i class="fa fa-safari"></i>
+                        <span class="nav-label">工资管理</span>
+                    </a>
+                </li>
+                <li class="line dk"></li>
+                <li>
+                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">分数管理 </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
                             <a class="J_menuItem" href="<%=path %>/teacher/studentQuery.action">查询员工考试分数</a>
                         </li>
                         <li>
                             <a class="J_menuItem" href="<%=path %>/teacher/studentAssessQuery.action">查询员工考核分数</a>
                         </li>
-                        <li>
+                       <%-- <li>
                             <a class="J_menuItem" href="<%=path %>/target_query.action">查询考核指标</a>
-                        </li>
+                        </li>--%>
                         <li>
                             <a class="J_menuItem" href="<%=path %>/teacher/studentJfree.jsp">显示部门柱状图</a>
                         </li>
-
                     </ul>
                 </li>
                 <li class="line dk"></li>
-                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                    <span class="ng-scope">分类</span>
-                </li>
+
                 <li>
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">试题管理 </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -101,27 +114,23 @@
                     </ul>
                 </li>
                 <li class="line dk"></li>
-                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                    <span class="ng-scope">分类</span>
-                </li>
+
                 <li>
-                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">试题管理 </span><span class="fa arrow"></span></a>
+                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">分类管理 </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="<%=path %>/teacher/bigtype_query.action">一级分类</a>
                         </li>
                         <li><a class="J_menuItem" href="<%=path %>/teacher/centre_query.action">二级分类</a>
                         </li>
-                        <li><a class="J_menuItem" href="<%=path %>/teacher/small_query.action">三级分类</a>
-                        </li>
+                        <%--<li><a class="J_menuItem" href="<%=path %>/teacher/small_query.action">三级分类</a>
+                        </li>--%>
                     </ul>
                 </li>
                 <li class="line dk"></li>
-                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                    <span class="ng-scope">分类</span>
-                </li>
+
                 <li>
                     <a href="javascript:;" data-toggle="modal" data-target="#modal"><i class="fa fa-envelope"></i>
-                        <span class="nav-label">修改密码 </span><span class="fa arrow"></span>
+                        <span class="nav-label">修改密码 </span>
                     </a>
                 </li>
             </ul>
@@ -132,90 +141,27 @@
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
-                        <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
+                <div class="navbar-header" style="width: 30%"> <a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a>
+
                 </div>
-              <%--  <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
-                        </a>
-                        &lt;%&ndash;  <ul class="dropdown-menu dropdown-messages">
-                              <li class="m-t-xs">
-                                  <div class="dropdown-messages-box">
-                                      <a href="profile.html" class="pull-left">
-                                          <img alt="image" class="img-circle" src="img/a7.jpg">
-                                      </a>
-                                      <div class="media-body">
-                                          <small class="pull-right">46小时前</small>
-                                          <strong>小四</strong> 是不是只有我死了,你们才不骂爵迹
-                                          <br>
-                                          <small class="text-muted">3天前 2014.11.8</small>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                  <div class="dropdown-messages-box">
-                                      <a href="profile.html" class="pull-left">
-                                          <img alt="image" class="img-circle" src="img/a4.jpg">
-                                      </a>
-                                      <div class="media-body ">
-                                          <small class="pull-right text-navy">25小时前</small>
-                                          <strong>二愣子</strong> 呵呵
-                                          <br>
-                                          <small class="text-muted">昨天</small>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                  <div class="text-center link-block">
-                                      <a class="J_menuItem" href="mailbox.html">
-                                          <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-                                      </a>
-                                  </div>
-                              </li>
-                          </ul>&ndash;%&gt;
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                &lt;%&ndash; <a href="mailbox.html">
-                                     <div>
-                                         <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
-                                         <span class="pull-right text-muted small">4分钟前</span>
-                                     </div>
-                                 </a>&ndash;%&gt;
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                &lt;%&ndash;<a href="profile.html">
-                                    <div>
-                                        <i class="fa fa-qq fa-fw"></i> 3条新回复
-                                        <span class="pull-right text-muted small">12分钟钱</span>
-                                    </div>
-                                </a>&ndash;%&gt;
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a class="J_menuItem" href="notifications.html">
-                                        <strong>查看所有 </strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>--%>
+
+                    <ul class="nav navbar-nav navbar-right col-sm-2 col-xs-5" style="margin-right: 10px;">
+                        <li>
+                            <div class="btn-group">
+                                <button class="btn btn-primary navbar-btn" onclick="fan()" >上一页</button>&nbsp;
+                                <script>
+                                    function fan() {
+                                        history.go(-1);
+                                    }
+                                    function shua() {
+                                        document.getElementById('J_iframe').contentWindow.location.reload(true);
+                                    }
+                                </script>
+                                &nbsp; <button class="btn btn-primary navbar-btn" onclick="shua()"><span class="glyphicon glyphicon-repeat"></span></button>
+                            </div>
+                        </li>
+
+                    </ul>
             </nav>
         </div>
         <div class="row J_mainContent" id="content-main">
@@ -267,7 +213,28 @@
         </div>
     </div>
 </div>
+
+<!-- 全局js -->
+<script src="<%=path %>/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=path %>/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=path %>/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=path %>/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=path %>/admin/js/plugins/layer/layer.min.js"></script>
+
+<!-- 自定义js -->
+<script src="<%=path %>/admin/js/hAdmin.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=path %>/admin/js/index.js"></script>
+
+<!-- 第三方插件 -->
+<script src="<%=path %>/admin/js/plugins/pace/pace.min.js"></script>
 <script>
+$(function () {
+    student="${sessionScope.teacherInfo.sysid}";
+    if(student==null||student==''){
+        alert("未登录,跳转至登录界面")
+        window.location.href="<%=path %>/teacher/login.jsp"
+    }
+})
     new Vue({
         el: '#app',
         data: {
@@ -289,7 +256,7 @@
                         type: 'post',
                         url: 'update_teacherUpdate.action',
                         data:{
-                            'teacher.sysid':${teacherInfo.sysid},
+                            'teacher.sysid':'${teacherInfo.sysid}',
                             'teacher.teacherID':this.name,
                             'teacher.password':this.password1,
                             'teacherpd':this.password2
@@ -307,20 +274,6 @@
         }
     })
 </script>
-<!-- 全局js -->
-<script src="<%=path %>/admin/js/jquery.min.js?v=2.1.4"></script>
-<script src="<%=path %>/admin/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="<%=path %>/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="<%=path %>/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<%=path %>/admin/js/plugins/layer/layer.min.js"></script>
-
-<!-- 自定义js -->
-<script src="<%=path %>/admin/js/hAdmin.js?v=4.1.0"></script>
-<script type="text/javascript" src="<%=path %>/admin/js/index.js"></script>
-
-<!-- 第三方插件 -->
-<script src="<%=path %>/admin/js/plugins/pace/pace.min.js"></script>
-
 </body>
 
 </html>

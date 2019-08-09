@@ -30,7 +30,7 @@ public class CheckPassword {
         HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        if(studentServiceImpl.getStudentByName(password)!=null){
+        if(studentServiceImpl.getStudentByName(password).size()>0){
             out.print("用户名已存在!请重新输入!");
         } else {
             out.print("可以注册！");

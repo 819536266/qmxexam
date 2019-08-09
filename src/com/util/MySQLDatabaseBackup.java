@@ -35,7 +35,7 @@ public class MySQLDatabaseBackup {
                 Calendar instance = Calendar.getInstance();
                 long l = file.lastModified();
                 Date date = new Date();
-                if((date.getTime()-l)>(60*60*60*24*7*7)){
+                if((date.getTime()-l)>(1000*60*60*7)){
                     file.delete();
                 }
             }

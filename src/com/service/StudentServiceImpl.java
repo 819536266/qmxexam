@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.util.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,11 +16,7 @@ import com.dao.StudentDao;
 import com.dao.StudentDaoImpl;
 import com.entity.Scorde;
 import com.entity.Student;
-import com.util.Condition;
-import com.util.MD5;
-import com.util.Page;
-import com.util.PageResult;
-import com.util.PageUtil;
+import org.hibernate.criterion.DetachedCriteria;
 
 public class StudentServiceImpl implements StudentService{
 	private StudentDao studentDao = new StudentDaoImpl();
@@ -106,7 +103,7 @@ public class StudentServiceImpl implements StudentService{
 	 * 删除单条员工信息
 	 * */
 	@Override
-	public void deleteStudent(Integer studentID) {
+	public void deleteStudent(Student studentID) {
 		// TODO Auto-generated method stub
 		studentDao.deleteStudent(studentID);
 		
@@ -158,47 +155,56 @@ public class StudentServiceImpl implements StudentService{
 			String password = row.getCell(1).getStringCellValue();
 			//存入对象
 			String encrypt = MD5.Encrypt(password);
-			
+
 			student.setPassword(encrypt);
 			student.setSclass(sclass);
 			student.setStudentName(studentName);
 			student.setTerm(term);
-			if(studentDao.findByPassword(encrypt)==null){
+            student.setState(0);
+			if(studentDao.findByStudentName(studentName)==null){
 				//查询该部门人数
 				Integer count=studentDao.findBySclass(sclass,term);
 				String ID=null;
 				if(count==0){
 					if(password.length()>5){
-						
+
 						ID=onesclass+term+"1"+password.substring(password.length()-4,password.length());
 					}else{
 						ID=onesclass+term+"1";
 					}
-					
+
 				}else{
 					count=count+1;
 					if(password.length()>5){
-						
+
 						ID=onesclass+term+count.toString()+password.substring(password.length()-4,password.length());
-						
+
 					}else{
 						ID=onesclass+term+count.toString();
 					}
 				}
 				student.setStudentID(ID);
 				Scorde scorde = new Scorde();
+				Scorde scorde1 = new Scorde();
+                scorde1.setTesttime(new Date());
 				scorde.setTesttime(new Date());
+				scorde1.setStuSysid(student);
 				scorde.setStuSysid(student);
+                scorde1.setShorttime(0);
+                scorde.setShorttime(0);
+				scorde1.setCount(0);
 				scorde.setCount(0);
+				scorde1.setTimescore(0);
 				scorde.setTimescore(0);
 				student.getSr().add(scorde);
+                student.getSr().add(scorde1);
 				studentDao.save(student);
-				
+
 			}else{
 				student.setPassword(password);
 				list.add(student);
 			}
-			
+
 		}
 		return list;
 	}
@@ -216,6 +222,22 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public void updateStudent(Student studentInfo) {
 		studentDao.updateStudent(studentInfo);
+	}
+
+	@Override
+	public int countStudentMar(BootstrapTable bootstrapTable, DetachedCriteria condition) {
+		return studentDao.countStudentMar(condition);
+	}
+
+	@Override
+	public List<Student> queryStudentByPageMar(DetachedCriteria forClass, BootstrapTable page) {
+		List<Student> list = studentDao.queryStudentByPageMar(forClass,page);
+		return list;
+	}
+
+	@Override
+	public List<Student> getByCriteria(DetachedCriteria detachedCriteria) {
+		return studentDao.getByCriteria(detachedCriteria);
 	}
 
 

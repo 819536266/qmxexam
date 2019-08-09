@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.entity.Scorde;
 import com.entity.Student;
+import com.util.BootstrapTable;
 import com.util.Condition;
 import com.util.Page;
 import com.util.PageResult;
+import org.hibernate.criterion.DetachedCriteria;
 
 public interface StudentService {
     //判断是否为合法员工，决定是否登录
@@ -38,7 +40,7 @@ public interface StudentService {
 
     //2019.3.6  牛牛修改
     //删除单条员工信息
-    public void deleteStudent(Integer sysid);
+    public void deleteStudent(Student sysid);
 
     //修改员工信息
     public void updateStudent(String studentName, String term, String sclass, Integer sysid);
@@ -61,4 +63,10 @@ public interface StudentService {
     public List<Scorde> exportExcel(Condition condition);
 
     void updateStudent(Student studentInfo);
+
+    int countStudentMar(BootstrapTable bootstrapTable, DetachedCriteria condition);
+
+    List<Student> queryStudentByPageMar(DetachedCriteria forClass, BootstrapTable page);
+
+    List<Student> getByCriteria(DetachedCriteria detachedCriteria);
 }

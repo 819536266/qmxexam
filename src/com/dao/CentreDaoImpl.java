@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import java.io.Serializable;
 import java.util.List;
 
-public class CentreDaoImpl implements CentreDao {
+public class CentreDaoImpl extends BaseDaoImpl<Centre> implements CentreDao {
 
 
     @Override

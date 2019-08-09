@@ -9,11 +9,11 @@
             <!-- 主键生成策略 -->
             <generator class="native"></generator>
         </id>
-        <!-- 教师id -->
+        <!-- 管理员id -->
         <property name="teacherID" not-null="true"></property>
-        <!-- 教师登录密码 -->
+        <!-- 管理员登录密码 -->
         <property name="password" not-null="true"></property>
-        <!-- 教师所带部门 -->
+        <!-- 管理员所带部门 -->
         <property name="sclass"></property>
         <property name="sclass1"></property>
         <property name="sclass2"></property>
